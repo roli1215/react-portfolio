@@ -23,9 +23,15 @@ const Home = () => {
                 />
                 </h2>
                 <div className="flex justify-between pt-6 max-w-[200px] w-full">
-                    <FaFacebook className= "cursor-pointer" size={25}/>
+                <a href="https://www.facebook.com/roland.karczub/" target="_blank" rel="noopener noreferrer">
+                    <FaFacebook className="cursor-pointer" size={25} />
+                </a>
+                <a href="https://www.instagram.com/_roland02_/" target="_blank" rel="noopener noreferrer">
                     <FaInstagram  className= "cursor-pointer" size={25}/>
+                </a>
+                <a href="https://www.instagram.com/_roland02_/" target="_blank" rel="noopener noreferrer">
                     <FaLinkedin  className= "cursor-pointer" size={25}/>
+                </a>
                 </div>
             </div>
        </div>
