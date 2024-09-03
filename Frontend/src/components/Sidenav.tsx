@@ -33,16 +33,16 @@ const Sidenav = () => {
                     ''
                 )
             }
-            <div className="md:block hidden fixed top-[30%] z-10">
+            <div className="md:block hidden fixed top-[38.5%] z-10">
                 <div className="flex flex-col">
-                    <a href="#home" className='rounded-full shadow-lg bg-gray-100 shadow-gray-400 m-2 p-4 cursor-pointer hover:scale-110 ease-in duration-300'>
-                        <AiOutlineHome size={22}/>
+                    <a href="#home" className='rounded-full shadow-lg bg-gray-100 shadow-gray-600 m-2 p-4 cursor-pointer hover:scale-110 ease-in duration-300'>
+                        <AiOutlineHome size={23} />
                     </a>
-                    <a href="#projects" className='rounded-full shadow-lg bg-gray-100 shadow-gray-400 m-2 p-4 cursor-pointer hover:scale-110 ease-in duration-300'>
-                        <GrProjects size={22}/>
+                    <a href="#projects" className='rounded-full shadow-lg bg-gray-100 shadow-gray-600 m-2 p-4 cursor-pointer hover:scale-110 ease-in duration-300'>
+                        <GrProjects size={23}/>
                     </a>
-                    <a href="#contact" className='rounded-full shadow-lg bg-gray-100 shadow-gray-400 m-2 p-4 cursor-pointer hover:scale-110 ease-in duration-300'>
-                        <AiOutlineMail size={22}/>
+                    <a href="#contact" className='rounded-full shadow-lg bg-gray-100 shadow-gray-600 m-2 p-4 cursor-pointer hover:scale-110 ease-in duration-300'>
+                        <AiOutlineMail size={23}/>
                     </a>
                 </div>
             </div>
