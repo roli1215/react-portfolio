@@ -1,6 +1,7 @@
 import { AiOutlineMail, AiOutlineHome, AiOutlineMenu } from "react-icons/ai";
 import { useState } from "react";
 import { GrProjects } from "react-icons/gr";
+import { CgProfile } from "react-icons/cg";
 
 const Sidenav = () => {
 
@@ -27,6 +28,10 @@ const Sidenav = () => {
                             <AiOutlineMail size={20} />
                             <span className='pl-4'>Contact</span>
                         </a>
+                        <a onClick={handleNav} href="#about" className = "w-[75%] flex justify-center  items-center rounded-full shadow-lg bg-gray-100 shadow-gray-400 m-2 p-4 cursor-pointer hover:scale-110 ease-in duration:200">
+                            <CgProfile size={20} />
+                            <span className='pl-4'>About</span>
+                        </a>
                     </div>
                 ) :
                 (
@@ -43,6 +48,9 @@ const Sidenav = () => {
                     </a>
                     <a href="#contact" className='rounded-full shadow-lg bg-gray-100 shadow-gray-600 m-2 p-4 cursor-pointer hover:scale-110 ease-in duration-300'>
                         <AiOutlineMail size={23}/>
+                    </a>
+                    <a href="#about" className='rounded-full shadow-lg bg-gray-100 shadow-gray-600 m-2 p-4 cursor-pointer hover:scale-110 ease-in duration-300'>
+                        <CgProfile size={23}/>
                     </a>
                 </div>
             </div>
