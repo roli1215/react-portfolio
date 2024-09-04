@@ -1,7 +1,7 @@
 
-import Contact from './components/Contact'
-import Home from './components/Home'
-import Projects from './components/Projects'
+import Contact from './screens/Contact'
+import Home from './screens/Home'
+import Projects from './screens/Projects'
 import Sidenav from './components/Sidenav'
 function App() {
 
