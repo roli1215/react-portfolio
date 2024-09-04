@@ -10,7 +10,7 @@ const Projects = () => {
         rerum laborum asperiores iste neque blanditiis hic?
       </p>
       <div className='grid sm:grid-cols-2 gap-12'>
-        <ProjectItem img={"assets/background.JPG"} title="RunSync"/>
+        <ProjectItem img={"assets/runBackground.jpg"} title="RunSync"/>
         <ProjectItem img={"assets/memeBackground.jpg"} title="Meme Searcher"/>
       </div>
     </div>

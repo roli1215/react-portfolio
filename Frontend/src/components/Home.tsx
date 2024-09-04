@@ -4,14 +4,14 @@ import { TypeAnimation } from "react-type-animation"
 const Home = () => {
   return (
     <div id='home'>
-      <img src="assets/background.JPG" alt="background" className="w-full h-screen object-cover "/>
+      <img src="assets/bg.jpg" alt="background" className="w-full h-screen object-cover "/>
        <div className="w-full h-screen absolute top-0 left-0 bg-white/30">
             <div className="max-w-[1000px] items-center justify-center m-auto h-full w-full flex flex-col lg:items-start ">
-                <h1 className="sm:text-5xl text-4xl font-bold text-gray-800"> I'm Roland</h1>
-                <h2 className="flex sm:text-3xl text-2xl pt-4 text-gray-800"> I'm a
+                <h1 className="sm:text-6xl text-5xl font-bold text-gray-800"> I'm Roland</h1>
+                <h2 className="flex sm:text-4xl text-2xl font-bold pt-4 text-gray-800"> I'm a
                 <TypeAnimation
                     sequence={[
-                        'Developer',
+                        'TypeScript Developer',
                         2000, 
                         'Trail Runner',
                         2000,
@@ -22,15 +22,15 @@ const Home = () => {
                     repeat={Infinity}
                 />
                 </h2>
-                <div className="flex justify-between pt-6 max-w-[200px] w-full">
+                <div className="flex justify-between pt-5 max-w-[165px] w-full">
                 <a href="https://www.facebook.com/roland.karczub/" target="_blank" rel="noopener noreferrer">
-                    <FaFacebook className="cursor-pointer" size={25} />
+                    <FaFacebook className="cursor-pointer" size={30} />
                 </a>
                 <a href="https://www.instagram.com/_roland02_/" target="_blank" rel="noopener noreferrer">
-                    <FaInstagram  className= "cursor-pointer" size={25}/>
+                    <FaInstagram  className= "cursor-pointer" size={30}/>
                 </a>
                 <a href="https://www.instagram.com/_roland02_/" target="_blank" rel="noopener noreferrer">
-                    <FaLinkedin  className= "cursor-pointer" size={25}/>
+                    <FaLinkedin  className= "cursor-pointer" size={30}/>
                 </a>
                 </div>
             </div>
