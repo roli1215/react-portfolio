@@ -3,10 +3,10 @@ import ApplyModel from '../models/applyModel';
 
 export const getApplies = async (req: Request, res: Response) => {
   try {
-    const users = await ApplyModel.find();
-    res.json(users);
+    const applies = await ApplyModel.find();
+    res.json(applies);
   } catch (error) {
-    res.status(500).json({ message: 'Error fetching users', error });
+    res.status(500).json({ message: 'Error fetching applies', error });
   }
 };
 

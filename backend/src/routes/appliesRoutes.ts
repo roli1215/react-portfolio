@@ -5,6 +5,6 @@ import { postApply } from '../controllers/appliesController';
 const router = express.Router();
 
 router.get('/applies', getApplies);
-router.post('/applies', postApply);
+router.post('/applies/upload', postApply);
 
 export default router;
