@@ -1,13 +1,11 @@
-import mongoose from "mongoose";
+import { Request, Response } from 'express';
+import ApplyModel from '../models/applyModel';
 
-const applySchema = new mongoose.Schema({
-  name : {type: String, required: true},
-  phone : {type: String, required: true},
-  email : {type: String, required: true},
-  subject : {type: String, required: true},
-  message : {type: String, required: true},
-});
-
-const ApplyModel = mongoose.model('applies', applySchema);
-
-export default ApplyModel;
+export const getApplies = async (req: Request, res: Response) => {
+  try {
+    const users = await ApplyModel.find();
+    res.json(users);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching users', error });
+  }
+};
