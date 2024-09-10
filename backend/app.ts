@@ -8,5 +8,4 @@ app.use(cors());
 app.use(express.json());
 
 app.use(appliesRoutes);
-
 export default app;
