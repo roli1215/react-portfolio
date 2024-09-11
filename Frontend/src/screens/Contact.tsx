@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 
+
 const Contact = () => {
 
     const [formData, setFormData] = useState({
@@ -21,7 +22,7 @@ const Contact = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:3000/applies', formData);
+            const response = await axios.post(process.env.API_URL + '/applies', formData);
             console.log(response.data.message);
             setFormData({
                 name : '',
@@ -49,6 +50,7 @@ const Contact = () => {
                 <div className="flex flex-col">
                     <label  className="uppercase text-sm py-2 font-bold">Phone</label>
                     <input className="border-2 rounded-lg p-3 flex border-gray-300" type="text" name="phone" value={formData.phone} onChange={handleChange} required />
+                    <label className="text-xs text-gray-400"></label>
                 </div>
             </div>
             <div className="flex flex-col py-2">
