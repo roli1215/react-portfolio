@@ -4,7 +4,7 @@ const projectSchema = new mongoose.Schema({
   title : {type: String, required: true},
   stack : {type: String, required: true},
   description : {type: String, required: true},
-  imageId : {type: String, required: true},
+  imageId : {type: mongoose.Schema.Types.ObjectId, ref: 'images', required: true},
 
 }, { timestamps: true });
 
