@@ -4,7 +4,7 @@ FROM node:slim
 # Copying all the files in our project
 COPY . .
 
-ENV MONGO_URL=mongodb://karczubroland:kvyuHjgo8Bi2W9!@157.173.120.239:27017/portfolio
+ENV MONGO_URL=mongodb://karczubroland:kvyuHjgo8Bi2W9!@157.173.120.239:27017
 # Installing dependencies
 RUN npm i -D tsx
 
