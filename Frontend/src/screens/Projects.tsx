@@ -6,11 +6,12 @@ import { ProjectDTO } from '../DTOs/ProjectDTO';
 const Projects = () => {
 
   const [projects, setProjects] = useState<ProjectDTO[]>([]);
+  const apiUrl = import.meta.env.VITE_API_URL as string;
 
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/projects');
+        const response = await axios.get(apiUrl + '/projects');
         setProjects(response.data);
         
       } catch (error) {

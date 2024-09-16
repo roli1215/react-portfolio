@@ -1,8 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
 
-
-
 const Contact = () => {
 
     const [formData, setFormData] = useState({
@@ -12,6 +10,8 @@ const Contact = () => {
         subject : '',
         message : '',
     });
+
+    const apiUrl = import.meta.env.VITE_API_URL as string;
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setFormData({
@@ -23,7 +23,7 @@ const Contact = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:3000/applies/upload', formData);
+            const response = await axios.post(apiUrl + '/applies/upload', formData);
             console.log(response.data.message);
             setFormData({
                 name : '',
