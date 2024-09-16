@@ -1,5 +1,5 @@
 
-import { ImageDTO } from "./imageDTO";
+import { ImageDTO } from "./ImageDTO";
 
 export interface ProjectDTO {
   _id: string;

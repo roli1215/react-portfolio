@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import ProjectItem from '../components/ProjectItem'
 import axios from 'axios';
-import { ProjectDTO } from '../DTOs/projectDTO';
+import { ProjectDTO } from '../DTOs/ProjectDTO';
 
 const Projects = () => {
 

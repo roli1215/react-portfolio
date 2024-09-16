@@ -1,0 +1,8 @@
+version: "3.7"
+services:
+  portfolio:
+    container_name: portfolio-frontend
+    build: .
+    restart: always
+    ports:
+      - "4173:4173"
