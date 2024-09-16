@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 
 
+
 const Contact = () => {
 
     const [formData, setFormData] = useState({
@@ -22,7 +23,7 @@ const Contact = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            const response = await axios.post(process.env.API_URL + '/applies', formData);
+            const response = await axios.post('http://localhost:3000/applies/upload', formData);
             console.log(response.data.message);
             setFormData({
                 name : '',
