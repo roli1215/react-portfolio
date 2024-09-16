@@ -15,7 +15,7 @@ const ProjectItem = ({title, img, description,language} : ProjectItemProps) => {
             {title}
         </h3>
         <h2 className="text-center font-bold m-3 text-base text-gray-300">{language}</h2>
-        <h2 className="font-bold m-3 text-justify text-sm text-gray-300 italic" >{description}</h2>
+        <h2 className="font-bold m-3 text-justify text-xs  text-gray-300 italic" >{description}</h2>
     </div>
     </div>
   )
