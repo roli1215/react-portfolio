@@ -29,7 +29,7 @@ const Home = () => {
                 <a href="https://www.instagram.com/_roland02_/" target="_blank" rel="noopener noreferrer">
                     <FaInstagram  className= "cursor-pointer" size={30}/>
                 </a>
-                <a href="https://www.instagram.com/_roland02_/" target="_blank" rel="noopener noreferrer">
+                <a href="https://www.linkedin.com/in/roland-karczub-b040b5326/" target="_blank" rel="noopener noreferrer">
                     <FaLinkedin  className= "cursor-pointer" size={30}/>
                 </a>
                 </div>
