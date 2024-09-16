@@ -46,12 +46,13 @@ const Sidenav = () => {
                     <a href="#projects" className='rounded-full shadow-lg bg-gray-100 shadow-gray-600 m-2 p-4 cursor-pointer hover:scale-110 ease-in duration-300'>
                         <GrProjects size={23}/>
                     </a>
-                    <a href="#contact" className='rounded-full shadow-lg bg-gray-100 shadow-gray-600 m-2 p-4 cursor-pointer hover:scale-110 ease-in duration-300'>
-                        <AiOutlineMail size={23}/>
-                    </a>
                     <a href="#about" className='rounded-full shadow-lg bg-gray-100 shadow-gray-600 m-2 p-4 cursor-pointer hover:scale-110 ease-in duration-300'>
                         <CgProfile size={23}/>
                     </a>
+                    <a href="#contact" className='rounded-full shadow-lg bg-gray-100 shadow-gray-600 m-2 p-4 cursor-pointer hover:scale-110 ease-in duration-300'>
+                        <AiOutlineMail size={23}/>
+                    </a>
+                    
                 </div>
             </div>
         </div>
