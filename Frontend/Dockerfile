@@ -5,6 +5,7 @@ WORKDIR /app
 COPY package.json .
 RUN npm i
 
+ENV VITE_API_URL=http://157.173.120.239:3000
 
 COPY . .
 
