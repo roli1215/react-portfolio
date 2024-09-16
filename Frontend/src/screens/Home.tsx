@@ -1,17 +1,14 @@
 
 import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa"
 import { TypeAnimation } from "react-type-animation"
-import { useI18n } from "../components/I18nContext";
 const Home = () => {
-
-    const {t, changeLanguage, currentLanguage} = useI18n();
 
   return (
     <div id='home'>
       <img src="assets/bg.jpg" alt="background" className="w-full h-screen object-cover "/>
        <div className="w-full h-screen absolute top-0 left-0 bg-white/30">
             <div className="max-w-[1000px] items-center justify-center m-auto h-full w-full flex flex-col lg:items-start ">
-                <h1 className="sm:text-6xl text-5xl font-bold text-gray-800"> {t("iam")}</h1>
+                <h1 className="sm:text-6xl text-5xl font-bold text-gray-800"> I am</h1>
                 <h2 className="flex sm:text-4xl text-2xl font-bold pt-4 text-gray-800"> I'm a
                 <TypeAnimation
                     sequence={[
@@ -37,10 +34,6 @@ const Home = () => {
                     <FaLinkedin  className= "cursor-pointer" size={30}/>
                 </a>
                 </div>
-                <select value = {currentLanguage} onChange={(e) => changeLanguage(e.target.value as "en" | "hu")} className="mt-5">
-                    <option value="en">English</option>
-                    <option value="hu">Hungarian</option>
-                </select>
             </div>
        </div>
     </div>
