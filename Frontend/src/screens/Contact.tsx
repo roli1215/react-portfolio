@@ -71,6 +71,8 @@ const Contact = () => {
                 Send Message
             </button>
         </form>
+        <div className="max-w-[1200px] bg-black h-40">
+        </div>
     </div>
   )
 }

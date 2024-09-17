@@ -18,7 +18,7 @@ const About = () => {
             </div>
             <h1 className='text-3xl font-bold text-[#000000]'>Experience</h1>
             <div className="w-full h-[2px] bg-black mt-2"></div>
-            <div className='grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-8'>
+            <div className='grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-8 py-4'>
             <SkillsItem img="assets/react.svg" ></SkillsItem>
             <SkillsItem img="assets/typescript.svg" ></SkillsItem>
             <SkillsItem img="assets/javascript.svg" ></SkillsItem>
