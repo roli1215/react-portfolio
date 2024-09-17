@@ -41,7 +41,7 @@ const Contact = () => {
 
   return (
     <div id="contact" className="max-w-[1200px] m-auto md:pl-20 p-4 ">
-        <h1 className ="py-4 text-4xl font-bold text-left text-[#000] ">Contact</h1>
+        <h1 className ="text-4xl font-bold text-left text-[#000] ">Contact</h1>
         <div className="w-full h-[2px] bg-black mt-2"></div>
         <form onSubmit={handleSubmit} method="POST" encType="multipart/form-data">
             <div className="grid md:grid-cols-2 gap-4 w-full py-2">

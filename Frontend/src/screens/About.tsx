@@ -16,7 +16,7 @@ const About = () => {
               <span>Information Technology Major – István Bocskai High School and Technical School</span>
               <span>2017-2021</span>
             </div>
-            <h1 className='text-3xl font-bold text-[#000000] py-8'>Experience</h1>
+            <h1 className='text-3xl font-bold text-[#000000]'>Experience</h1>
             <div className="w-full h-[2px] bg-black mt-2"></div>
             <div className='grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-8'>
             <SkillsItem img="assets/react.svg" ></SkillsItem>
