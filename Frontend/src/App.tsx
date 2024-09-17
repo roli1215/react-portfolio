@@ -10,7 +10,9 @@ function App() {
 
   return (
     <>
+      <div className='max-w-[1200px]'>
       <Sidenav />
+      </div>
       <Home />
       <div className='max-w-[1200px] m-auto md:pl-20 p-4 py-16'>
         <Projects />
