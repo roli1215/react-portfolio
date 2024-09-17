@@ -2,7 +2,7 @@ import SkillsItem from '../components/SkillsItem'
 
 const About = () => {
   return (
-    <div id='about' className='max-w-[1200px] m-auto md:pl-20 p-4 py-16'>
+    <div id='about' >
       <h1 className='text-4xl font-bold text-left text-[#000000] '>About</h1>
       <div className="w-full h-[2px] bg-black mt-2"></div>
       <p className="font-bold py-8 text-justify">I am a graduate software developer with a strong interest in web development and mobile app development. I have created a few personal projects so far, some of which are still in progress, as I strive to improve and reach a higher level of proficiency. My experience is primarily in React/React Native, working with JavaScript/TypeScript, and in database management with MongoDB and PostgreSQL. I am open to trying new things and am committed to performing the tasks ahead of me to the best of my ability.</p>

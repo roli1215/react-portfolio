@@ -24,7 +24,7 @@ const Projects = () => {
 
 
   return (
-    <div id='projects' className='max-w-[1200px] m-auto md:pl-20 p-4 py-16'>
+    <div id='projects'>
       <h1 className='text-4xl font-bold text-left text-[#000000] '>Projects</h1>
       <div className="w-full h-[2px] bg-black mt-2"></div>
       <p className="font-bold py-8">Here are the projects I have worked on so far, or am still working on. Some of them are in the early stages or incomplete, but I enjoy working on them whenever I have time. I learn a lot while creating them and try to gain as much experience as possible to become more successful.

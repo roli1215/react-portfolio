@@ -40,7 +40,7 @@ const Contact = () => {
 
 
   return (
-    <div id="contact" className="max-w-[1200px] m-auto md:pl-20 p-4 ">
+    <div id="contact">
         <h1 className ="text-4xl font-bold text-left text-[#000] ">Contact</h1>
         <div className="w-full h-[2px] bg-black mt-2"></div>
         <form onSubmit={handleSubmit} method="POST" encType="multipart/form-data">
@@ -71,8 +71,6 @@ const Contact = () => {
                 Send Message
             </button>
         </form>
-        <div className="max-w-[1200px] bg-black h-40">
-        </div>
     </div>
   )
 }
