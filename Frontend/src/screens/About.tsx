@@ -9,8 +9,8 @@ const About = () => {
         <div className="w-full h-[2px] bg-black mt-2"></div>
             <p className="text-right font-bold">2021-2024</p>
             <div className="font-bold">Software Development – University of Miskolc</div>
-      <p className="text-right font-bold">2017-2021</p>
-      <div className="font-bold">Information Technology Major – István Bocskai High School and Technical School</div>
+      
+      <div className="font-bold">Information Technology Major – István Bocskai High School and Technical School <p className="text-right font-bold">2017-2021</p></div>
             <h1 className='text-3xl font-bold text-[#000000] py-8'>Experience</h1>
         <div className='grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-8'>
             <SkillsItem img="assets/react.svg" ></SkillsItem>
