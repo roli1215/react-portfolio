@@ -10,16 +10,16 @@ function App() {
 
   return (
     <>
-      <div className='max-w-[1200px]'>
+    <div className="w-full overflow-x-hidden">
       <Sidenav />
-      </div>
       <Home />
-      <div className='max-w-[1200px] m-auto md:pl-20 p-4 py-16'>
+      <div className='max-w-[1200px] m-auto p-4 py-16'>
         <Projects />
         <About />
         <Contact />
       </div>
       <Footer />
+    </div>
     </>
   )
 }
