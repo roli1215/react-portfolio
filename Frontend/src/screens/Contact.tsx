@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import { nameRegex, phoneRegex, emailRegex, subjectRegex } from "../utils/Validation";
 
 const Contact = () => {
 
@@ -11,20 +12,61 @@ const Contact = () => {
         message : '',
     });
 
+    const [errors, setErrors] = useState({
+        name: '',
+        phone: '',
+        email: '',
+        subject: '',
+    });
+
+    const [showModal, setShowModal] = useState(false);
+    const [modalMessage, setModalMessage] = useState('');
+
     const apiUrl = import.meta.env.VITE_API_URL as string;
+
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setFormData({
             ...formData,
             [e.target.name] : e.target.value
         });
+
+        if (e.target.name === 'name' && !nameRegex.test(e.target.value)) {
+            setErrors((prev) => ({ ...prev, name: 'Name can only contain letters and spaces.' }));
+        } else if (e.target.name === 'phone' && !phoneRegex.test(e.target.value)) {
+            setErrors((prev) => ({ ...prev, phone: 'Please enter a valid phone number.' }));
+        } else if (e.target.name === 'email' && !emailRegex.test(e.target.value)) {
+            setErrors((prev) => ({ ...prev, email: 'Please enter a valid email address.' }));
+        } else if (e.target.name === 'subject' && !subjectRegex.test(e.target.value)) {
+            setErrors((prev) => ({ ...prev, subject: 'Subject can only contain letters and spaces.' }));
+        } else {
+            setErrors((prev) => ({ ...prev, [e.target.name]: '' }));
+        }
     }
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+
+        if (!nameRegex.test(formData.name)) {
+            setErrors((prev) => ({ ...prev, name: 'Name can only contain letters and spaces.' }));
+            return;
+        }
+        if (!phoneRegex.test(formData.phone)) {
+            setErrors((prev) => ({ ...prev, phone: 'Please enter a valid phone number.' }));
+            return;
+        }
+        if (!emailRegex.test(formData.email)) {
+            setErrors((prev) => ({ ...prev, email: 'Please enter a valid email address.' }));
+            return;
+        }
+        if (!subjectRegex.test(formData.subject)) {
+            setErrors((prev) => ({ ...prev, subject: 'Subject can only contain letters and spaces.' }));
+            return;
+        }
         try {
-            const response = await axios.post(apiUrl + '/applies/upload', formData);
-            console.log(response.data.message);
+            await axios.post(apiUrl + '/applies/upload', formData);
+            setModalMessage("Message sent successfully!");
+            setShowModal(true);
             setFormData({
                 name : '',
                 phone : '',
@@ -33,9 +75,13 @@ const Contact = () => {
                 message : '',
             });
         } catch (error) {
-            console.log(error);
-            
+            setModalMessage("Message could not be sent!");
+            setShowModal(true);
         }
+    }
+
+    const closeModal = () => {
+        setShowModal(false);
     }
 
 
@@ -48,10 +94,12 @@ const Contact = () => {
                 <div className="flex flex-col">
                     <label className="uppercase text-sm py-2 font-bold">Name</label>
                     <input className="border-2 rounded-lg p-3 flex border-gray-300" type="text" name="name" value={formData.name} onChange={handleChange} required />
+                    {errors.name && <p className="text-red-500 font-bold text-xs">{errors.name}</p>}
                 </div>
                 <div className="flex flex-col">
                     <label  className="uppercase text-sm py-2 font-bold">Phone</label>
                     <input className="border-2 rounded-lg p-3 flex border-gray-300" type="text" name="phone" value={formData.phone} onChange={handleChange} required />
+                    {errors.phone && <p className="text-red-500 font-bold text-xs">{errors.phone}</p>}
                     <label className="text-xs text-gray-400"></label>
                 </div>
             </div>
@@ -62,6 +110,7 @@ const Contact = () => {
             <div className="flex flex-col py-2">
                 <label  className="uppercase text-sm py-2 font-bold">Subject</label>
                 <input className="border-2 rounded-lg p-3 flex border-gray-300" type="text" name="subject" value={formData.subject} onChange={handleChange} required />
+                {errors.subject && <p className="text-red-500 font-bold text-xs">{errors.subject}</p>}
             </div>
             <div className="flex flex-col py-2">
                 <label  className="uppercase text-sm py-2 font-bold">Message</label>
@@ -71,6 +120,19 @@ const Contact = () => {
                 Send Message
             </button>
         </form>
+        {showModal && (
+                <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
+                    <div className="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full text-center">
+                        <p className="mb-4">{modalMessage}</p>
+                        <button
+                            onClick={closeModal}
+                            className="bg-black text-white py-2 px-4 rounded-lg font-bold"
+                        >
+                            OK
+                        </button>
+                    </div>
+                </div>
+            )}
     </div>
   )
 }
