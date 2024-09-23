@@ -8,6 +8,13 @@ const Sidenav = () => {
     const [nav, setNav] = useState(false);
     const handleNav = () => {
         setNav(!nav);
+    
+    if (!nav) {
+        document.body.style.overflow = 'hidden';
+    } else {
+        document.body.style.overflow = 'auto';
+    }
+    
     };
 
     return (
@@ -15,22 +22,22 @@ const Sidenav = () => {
             <AiOutlineMenu onClick={handleNav} className = 'absolute top-4 right-4 z-[99] md:hidden'/>
             { 
                 nav ? (
-                    <div className='fixed w-full h-full bg-white/90 flex flex-col justify-center items-center z-20'>
-                        <a onClick={handleNav} href="#home" className = "w-[75%] flex justify-center  items-center rounded-full shadow-lg bg-gray-100 shadow-gray-400 m-2 p-4 cursor-pointer hover:scale-110 ease-in duration:200">
-                            <AiOutlineHome size={20} />
-                            <span className='pl-4'>Home</span>
+                    <div className='fixed w-full h-full bg-white/80 flex flex-col justify-center items-center z-20'>
+                        <a onClick={handleNav} href="#home" className = "w-[70%] flex   items-center rounded-full shadow-lg bg-gray-200 shadow-gray-700 m-2 p-4 cursor-pointer hover:scale-110 ease-in duration:200">
+                            <AiOutlineHome size={20} className="ml-20" />
+                            <span className='pl-4 font-bold'>Home</span>
                         </a>
-                        <a onClick={handleNav} href="#projects" className = "w-[75%] flex justify-center  items-center rounded-full shadow-lg bg-gray-100 shadow-gray-400 m-2 p-4 cursor-pointer hover:scale-110 ease-in duration:200">
-                            <GrProjects size={20} />
-                            <span className='pl-4'>Projects</span>
+                        <a onClick={handleNav} href="#projects" className = "w-[70%] flex   items-center rounded-full shadow-lg bg-gray-200 shadow-gray-700 m-2 p-4 cursor-pointer hover:scale-110 ease-in duration:200">
+                            <GrProjects size={20} className="ml-20"/>
+                            <span className='pl-4 font-bold'>Projects</span>
                         </a>
-                        <a onClick={handleNav} href="#about" className = "w-[75%] flex justify-center  items-center rounded-full shadow-lg bg-gray-100 shadow-gray-400 m-2 p-4 cursor-pointer hover:scale-110 ease-in duration:200">
-                            <CgProfile size={20} />
-                            <span className='pl-4'>About</span>
+                        <a onClick={handleNav} href="#about" className = "w-[70%] flex   items-center rounded-full shadow-lg bg-gray-200 shadow-gray-700 m-2 p-4 cursor-pointer hover:scale-110 ease-in duration:200">
+                            <CgProfile size={20} className="ml-20"/>
+                            <span className='pl-4 font-bold'>About</span>
                         </a>
-                        <a onClick={handleNav} href="#contact" className = "w-[75%] flex justify-center  items-center rounded-full shadow-lg bg-gray-100 shadow-gray-400 m-2 p-4 cursor-pointer hover:scale-110 ease-in duration:200">
-                            <AiOutlineMail size={20} />
-                            <span className='pl-4'>Contact</span>
+                        <a onClick={handleNav} href="#contact" className = "w-[70%] flex  items-center rounded-full shadow-lg bg-gray-200 shadow-gray-700 m-2 p-4 cursor-pointer hover:scale-110 ease-in duration:200">
+                            <AiOutlineMail size={20} className="ml-20"/>
+                            <span className='pl-4 font-bold'>Contact</span>
                         </a>
                     </div>
                 ) :
