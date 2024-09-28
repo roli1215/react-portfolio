@@ -2,11 +2,14 @@ import { useEffect, useState } from 'react';
 import ProjectItem from '../components/ProjectItem'
 import axios from 'axios';
 import { ProjectDTO } from '../DTOs/ProjectDTO';
+import { useTranslation } from 'react-i18next';
 
 const Projects = () => {
 
   const [projects, setProjects] = useState<ProjectDTO[]>([]);
   const apiUrl = import.meta.env.VITE_API_URL as string;
+
+  const {t} = useTranslation();
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -25,9 +28,9 @@ const Projects = () => {
 
   return (
     <div id='projects'>
-      <h1 className='text-4xl font-bold text-left text-[#000000] '>Projects</h1>
+      <h1 className='text-4xl font-bold text-left text-[#000000] '>{t('projects')}</h1>
       <div className="w-full h-[2px] bg-black mt-2"></div>
-      <p className="font-bold py-8">Here are the projects I have worked on so far, or am still working on. Some of them are in the early stages or incomplete, but I enjoy working on them whenever I have time. I learn a lot while creating them and try to gain as much experience as possible to become more successful.
+      <p className="font-bold py-8">{t('projectsText')}
       </p>
       <div className='grid sm:grid-cols-2 gap-12'>
         {projects.map((project) => (

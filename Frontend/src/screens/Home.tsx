@@ -2,13 +2,13 @@
 import { useTranslation } from "react-i18next";
 import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa"
 import { TypeAnimation } from "react-type-animation"
-import LanguageChange from "../components/LanguageChange";
 const Home = () => {
 
     const {t,i18n} = useTranslation()
 
   return (
     <div id='home'>
+        
       <img src="assets/bg.jpg" alt="background" className="w-full h-screen object-cover "/>
        <div className="w-full h-screen absolute top-0 left-0 bg-white/30">
             <div className="max-w-[1000px] items-center justify-center m-auto h-full w-full flex flex-col lg:items-start ">
@@ -38,8 +38,9 @@ const Home = () => {
                 <a href="https://www.linkedin.com/in/roland-karczub-b040b5326/" target="_blank" rel="noopener noreferrer">
                     <FaLinkedin  className= "cursor-pointer" size={30}/>
                 </a>
+                
                 </div>
-                <LanguageChange />
+                
             </div>
        </div>
     </div>

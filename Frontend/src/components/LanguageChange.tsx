@@ -16,15 +16,15 @@ const LanguageChange = () =>
     return (
       <button
       type="button"
-      className=" text-white  mt-2 flex items-center"
+      className=" rounded-full shadow-lg bg-gray-100 shadow-gray-600 m-2 p-4 cursor-pointer hover:scale-110 ease-in duration-300"
       onClick={handleChangeLanguage}
     >
       <ReactCountryFlag
         countryCode={currentLanguage === 'en' ? "GB" : "HU"} 
         svg
         style={{
-          width: '2.2em',
-          height: '2.2em',
+          width: '1.5em',
+          height: '1.5em',
         }}
         aria-label={currentLanguage === 'en' ? 'English flag' : 'Hungarian flag'}
       />

@@ -2,6 +2,7 @@ import { AiOutlineMail, AiOutlineHome, AiOutlineMenu } from "react-icons/ai";
 import { useState } from "react";
 import { GrProjects } from "react-icons/gr";
 import { CgProfile } from "react-icons/cg";
+import LanguageChange from "./LanguageChange";
 
 const Sidenav = () => {
 
@@ -37,13 +38,14 @@ const Sidenav = () => {
                             <AiOutlineMail size={20} className="ml-20"/>
                             <span className='pl-4 font-bold'>Contact</span>
                         </a>
+                        <LanguageChange/>
                     </div>
                 ) :
                 (
                     ''
                 )
             }
-            <div className="md:block fixed hidden top-[38.5%] z-10">
+            <div className="md:block fixed hidden top-[29.5%] z-10">
                 <div className="flex flex-col">
                     <a href="#home" className='rounded-full shadow-lg bg-gray-100 shadow-gray-600 m-2 p-4 cursor-pointer hover:scale-110 ease-in duration-300 '>
                         <AiOutlineHome size={23} />
@@ -57,7 +59,7 @@ const Sidenav = () => {
                     <a href="#contact" className='rounded-full shadow-lg bg-gray-100 shadow-gray-600 m-2 p-4 cursor-pointer hover:scale-110 ease-in duration-300'>
                         <AiOutlineMail size={23}/>
                     </a>
-                    
+                    <LanguageChange/>
                 </div>
             </div>
         </div>

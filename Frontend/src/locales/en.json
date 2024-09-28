@@ -2,5 +2,6 @@
     "name" : "I'm Roland",
     "status1" : "I'm a TypeScript Developer",
     "status2" : "I'm a Trail Runner",
-    "projects" : "Projects"
+    "projects" : "Projects",
+    "projectsText" : "Here are the projects I have worked on so far, or am still working on. Some of them are in the early stages or incomplete, but I enjoy working on them whenever I have time. I learn a lot while creating them and try to gain as much experience as possible to become more successful."
 }
