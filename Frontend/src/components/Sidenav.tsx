@@ -14,9 +14,7 @@ const Sidenav = () => {
     } else {
         document.body.style.overflow = 'auto';
     }
-    
     };
-
     return (
         <div>
             <AiOutlineMenu onClick={handleNav} className = 'absolute top-4 right-4 z-[99] md:hidden'/>
