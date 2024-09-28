@@ -2,7 +2,7 @@ import { useState } from "react";
 import ReactCountryFlag from "react-country-flag";
 import { useTranslation } from "react-i18next";
 
-const LanguageChange = () => 
+const LanguageChange = () =>
     {
     const {i18n:{changeLanguage, language} } = useTranslation();
     const [currentLanguage, setCurrentLanguage] = useState(language);
