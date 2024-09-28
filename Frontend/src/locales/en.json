@@ -1,5 +1,6 @@
 {
     "name" : "I'm Roland",
     "status1" : "I'm a TypeScript Developer",
-    "status2" : "I'm a Trail Runner"
+    "status2" : "I'm a Trail Runner",
+    "projects" : "Projects"
 }

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import ReactCountryFlag from "react-country-flag";
 import { useTranslation } from "react-i18next";
 
 const LanguageChange = () => 
@@ -13,13 +14,21 @@ const LanguageChange = () =>
     }
     
     return (
-        <button
-        type="button"
-        className="bg-black text-white p-2 rounded"
-        onClick={handleChangeLanguage}
-      >
-        {currentLanguage === 'en' ? 'Switch to Hungarian' : 'Switch to English'}
-      </button>
+      <button
+      type="button"
+      className=" text-white  mt-2 flex items-center"
+      onClick={handleChangeLanguage}
+    >
+      <ReactCountryFlag
+        countryCode={currentLanguage === 'en' ? "GB" : "HU"} 
+        svg
+        style={{
+          width: '2.2em',
+          height: '2.2em',
+        }}
+        aria-label={currentLanguage === 'en' ? 'English flag' : 'Hungarian flag'}
+      />
+    </button>
     )
     }
 
