@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { nameRegex, phoneRegex, emailRegex, subjectRegex } from "../utils/Validation";
+import { useTranslation } from "react-i18next";
 
 const Contact = () => {
 
@@ -65,7 +66,7 @@ const Contact = () => {
         }
         try {
             await axios.post(apiUrl + '/applies/upload', formData);
-            setModalMessage("Message sent successfully!");
+            setModalMessage(t('contactMessageSent'));
             setShowModal(true);
             setFormData({
                 name : '',
@@ -75,7 +76,7 @@ const Contact = () => {
                 message : '',
             });
         } catch (error) {
-            setModalMessage("Message could not be sent!");
+            setModalMessage(t('contactMessageError'));
             setShowModal(true);
         }
     }
@@ -84,40 +85,42 @@ const Contact = () => {
         setShowModal(false);
     }
 
+    const { t } = useTranslation();
+
 
   return (
     <div id="contact">
-        <h1 className ="text-4xl font-bold text-left text-[#000] ">Contact</h1>
+        <h1 className ="text-4xl font-bold text-left text-[#000] ">{t('contact')}</h1>
         <div className="w-full h-[2px] bg-black mt-2"></div>
         <form onSubmit={handleSubmit} method="POST" encType="multipart/form-data">
             <div className="grid md:grid-cols-2 gap-4 w-full py-2">
                 <div className="flex flex-col">
-                    <label className="uppercase text-sm py-2 font-bold">Name</label>
+                    <label className="uppercase text-sm py-2 font-bold">{t('contactName')}</label>
                     <input className="border-2 rounded-lg p-3 flex border-gray-300" type="text" name="name" value={formData.name} onChange={handleChange} required />
                     {errors.name && <p className="text-red-500 font-bold text-xs">{errors.name}</p>}
                 </div>
                 <div className="flex flex-col">
-                    <label  className="uppercase text-sm py-2 font-bold">Phone</label>
+                    <label  className="uppercase text-sm py-2 font-bold">{t('contactPhone')}</label>
                     <input className="border-2 rounded-lg p-3 flex border-gray-300" type="text" name="phone" value={formData.phone} onChange={handleChange} required />
                     {errors.phone && <p className="text-red-500 font-bold text-xs">{errors.phone}</p>}
                     <label className="text-xs text-gray-400"></label>
                 </div>
             </div>
             <div className="flex flex-col py-2">
-                <label  className="uppercase text-sm py-2 font-bold">Email</label>
+                <label  className="uppercase text-sm py-2 font-bold">{t('contactEmail')}</label>
                 <input className="border-2 rounded-lg p-3 flex border-gray-300" type="email" name="email" value={formData.email} onChange={handleChange} required />
             </div>
             <div className="flex flex-col py-2">
-                <label  className="uppercase text-sm py-2 font-bold">Subject</label>
+                <label  className="uppercase text-sm py-2 font-bold">{t('contactSubject')}</label>
                 <input className="border-2 rounded-lg p-3 flex border-gray-300" type="text" name="subject" value={formData.subject} onChange={handleChange} required />
                 {errors.subject && <p className="text-red-500 font-bold text-xs">{errors.subject}</p>}
             </div>
             <div className="flex flex-col py-2">
-                <label  className="uppercase text-sm py-2 font-bold">Message</label>
+                <label  className="uppercase text-sm py-2 font-bold">{t('contactMessage')}</label>
                 <textarea className="border-2 rounded-lg p-3 border-gray-300 " rows={10} name="message" value={formData.message} onChange={handleChange} required ></textarea>
             </div>
             <button className="bg-[#000] text-gray-100 mt-4 w-full p-4 rounded-lg font-bold" type="submit">
-                Send Message
+            {t('contactSend')}
             </button>
         </form>
         {showModal && (

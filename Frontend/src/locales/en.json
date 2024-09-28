@@ -3,5 +3,24 @@
     "status1" : "I'm a TypeScript Developer",
     "status2" : "I'm a Trail Runner",
     "projects" : "Projects",
-    "projectsText" : "Here are the projects I have worked on so far, or am still working on. Some of them are in the early stages or incomplete, but I enjoy working on them whenever I have time. I learn a lot while creating them and try to gain as much experience as possible to become more successful."
+    "projectsText" : "Here are the projects I have worked on so far, or am still working on. Some of them are in the early stages or incomplete, but I enjoy working on them whenever I have time. I learn a lot while creating them and try to gain as much experience as possible to become more successful.",
+    "about" : "About",
+    "aboutText" : "I am a graduate software developer with a strong interest in web development and mobile app development. I have created a few personal projects so far, some of which are still in progress, as I strive to improve and reach a higher level of proficiency. My experience is primarily in React/React Native, working with JavaScript/TypeScript, and in database management with MongoDB and PostgreSQL. I am open to trying new things and am committed to performing the tasks ahead of me to the best of my ability.",
+    "education" : "Education",
+    "education1" : "Software Developement - University of Miskolc",
+    "education2" : "Information Technology Major - István Bocskai High School and Technical School",
+    "experience" : "Experience",
+    "contact" : "Contact",
+    "contactName" : "Name",
+    "contactPhone" : "Phone",
+    "contactEmail" : "Email",
+    "contactSubject" : "Subject",
+    "contactMessage" : "Message",
+    "contactSend" : "Send Message",
+    "contactSuccess" : "Message sent successfully!",
+    "contactError" : "An error occurred while sending the message",
+    "contactMe" : "Contact Me"
+
+
+
 }
