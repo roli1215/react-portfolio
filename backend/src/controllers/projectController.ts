@@ -39,9 +39,9 @@ export const uploadImage = async (req: Request, res: Response) => {
 
 export const createProject = async (req: Request, res: Response) => {
   try {
-    const { title, stack, description, imageString, altText } = req.body;
+    const { title, stack, descriptionHU, descriptionEN, imageString, altText } = req.body;
 
-    if (!title || !stack || !description || !imageString || !altText) {
+    if (!title || !stack || !descriptionHU || !descriptionEN || !imageString || !altText) {
       return res.status(400).json({ message: 'All fields are required' });
     }
 
@@ -59,7 +59,8 @@ export const createProject = async (req: Request, res: Response) => {
     const newProject = new ProjectModel({
       title,
       stack,
-      description,
+      descriptionHU,
+      descriptionEN,
       imageId: savedImage._id,
     });
 
