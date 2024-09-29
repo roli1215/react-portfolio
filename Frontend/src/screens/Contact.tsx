@@ -25,7 +25,6 @@ const Contact = () => {
 
     const apiUrl = import.meta.env.VITE_API_URL as string;
 
-
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setFormData({
             ...formData,
@@ -33,13 +32,13 @@ const Contact = () => {
         });
 
         if (e.target.name === 'name' && !nameRegex.test(e.target.value)) {
-            setErrors((prev) => ({ ...prev, name: 'Name can only contain letters and spaces.' }));
+            setErrors((prev) => ({ ...prev, name: t('nameError') }));
         } else if (e.target.name === 'phone' && !phoneRegex.test(e.target.value)) {
-            setErrors((prev) => ({ ...prev, phone: 'Please enter a valid phone number.' }));
+            setErrors((prev) => ({ ...prev, phone: t('phoneError') }));
         } else if (e.target.name === 'email' && !emailRegex.test(e.target.value)) {
-            setErrors((prev) => ({ ...prev, email: 'Please enter a valid email address.' }));
+            setErrors((prev) => ({ ...prev, email: t('emailError') }));
         } else if (e.target.name === 'subject' && !subjectRegex.test(e.target.value)) {
-            setErrors((prev) => ({ ...prev, subject: 'Subject can only contain letters and spaces.' }));
+            setErrors((prev) => ({ ...prev, subject: t('subjectError') }));
         } else {
             setErrors((prev) => ({ ...prev, [e.target.name]: '' }));
         }
@@ -49,19 +48,19 @@ const Contact = () => {
         e.preventDefault();
 
         if (!nameRegex.test(formData.name)) {
-            setErrors((prev) => ({ ...prev, name: 'Name can only contain letters and spaces.' }));
+            setErrors((prev) => ({ ...prev, name: t('nameError') }));
             return;
         }
         if (!phoneRegex.test(formData.phone)) {
-            setErrors((prev) => ({ ...prev, phone: 'Please enter a valid phone number.' }));
+            setErrors((prev) => ({ ...prev, phone: t('phoneError') }));
             return;
         }
         if (!emailRegex.test(formData.email)) {
-            setErrors((prev) => ({ ...prev, email: 'Please enter a valid email address.' }));
+            setErrors((prev) => ({ ...prev, email: t('emailError') }));
             return;
         }
         if (!subjectRegex.test(formData.subject)) {
-            setErrors((prev) => ({ ...prev, subject: 'Subject can only contain letters and spaces.' }));
+            setErrors((prev) => ({ ...prev, subject: t('subjectError') }));
             return;
         }
         try {

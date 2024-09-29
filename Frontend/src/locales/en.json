@@ -20,7 +20,11 @@
     "contactSuccess" : "Message sent successfully!",
     "contactError" : "An error occurred while sending the message",
     "contactMe" : "Contact Me",
-    "home" : "Home"
+    "home" : "Home",
+    "nameError" : "Name can only contain letters and spaces.",
+    "emailError" : "Please enter a valid phone number.",
+    "phoneError" : "Please enter a valid email address.",
+    "subjectError" : "Subject can only contain letters and spaces."
 
 
 

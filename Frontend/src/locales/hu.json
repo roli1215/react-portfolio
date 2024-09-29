@@ -20,7 +20,11 @@
     "contactSuccess" : "Az üzenet sikeresen elküldve!",
     "contactError" : "Hiba történt az üzenet küldése közben",
     "contactMe" : "Kapcsolatfelvétel",
-    "home" : "Kezdőlap"
+    "home" : "Kezdőlap",
+    "nameError" : "A mező csak betűket és szóközöket tartalmazhat.",
+    "emailError" : "Az email cím nem megfelelő formátumú.",
+    "phoneError" : "A telefonszám nem megfelelő formátumú.",
+    "subjectError" : "A mező csak betűket és szóközöket tartalmazhat."
 
 
 
