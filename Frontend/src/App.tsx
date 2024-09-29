@@ -5,11 +5,13 @@ import Projects from './screens/Projects'
 import Sidenav from './components/Sidenav'
 import About from './screens/About'
 import Footer from './components/Footer'
+import { LanguageProvider } from './utils/languageContext'
 
 function App() {
 
   return (
     <>
+    <LanguageProvider>
     <div className="w-full overflow-x-hidden">
       <Sidenav />
       <Home />
@@ -20,6 +22,7 @@ function App() {
       </div>
       <Footer />
     </div>
+    </LanguageProvider>
     </>
   )
 }

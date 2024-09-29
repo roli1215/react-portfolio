@@ -1,3 +1,4 @@
+import { useLanguage } from "../utils/languageContext";
 
 interface ProjectItemProps {
     img : string,
@@ -8,6 +9,10 @@ interface ProjectItemProps {
     }
 
 const ProjectItem = ({title, img, descriptionHU, descriptionEN, language} : ProjectItemProps) => {
+
+  const {currentLanguage} = useLanguage();
+  const description = currentLanguage === 'en' ? descriptionEN : descriptionHU;
+
   return (
     <div className = "relative flex items-center justify-center h-auto w-full shadow-xl shadow-gray-600 rounded-xl group hover:bg-gradient-to-r from-gray-800 to-[#2b2a2a] cursor-pointer">
     <img src={img} alt={title} className="rounded-xl group-hover:opacity-10"/>
@@ -17,6 +22,7 @@ const ProjectItem = ({title, img, descriptionHU, descriptionEN, language} : Proj
         </h3>
         <h2 className="text-center font-bold m-3 text-base text-gray-300">{language}</h2>
         <h2 className="font-bold m-3 text-justify text-xxs md:text-sm  text-gray-300 italic" >
+            {description}
         </h2>
     </div>
     </div>

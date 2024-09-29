@@ -34,7 +34,7 @@ const Projects = () => {
       </p>
       <div className='grid sm:grid-cols-2 gap-12'>
         {projects.map((project) => (
-          <ProjectItem key = {project._id} img={project.imageId?.imageString} title = {project.title} description = {project.description} language = {project.stack}/>
+          <ProjectItem key = {project._id} img={project.imageId?.imageString} title = {project.title} descriptionHU = {project.descriptionHU} descriptionEN = {project.descriptionEN} language = {project.stack}/>
         ))}
       
       </div>
