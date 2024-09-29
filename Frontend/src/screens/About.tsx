@@ -14,7 +14,7 @@ const About = () => {
         <div className="w-full h-[2px] bg-black mt-2"></div>
             <div className="flex justify-between font-bold py-4">
               <span>{t('education1')}</span>
-              <span>2021-2024</span >
+              <span className='ml-12'>2021-2024</span >
             </div>
             <div className="flex justify-between font-bold py-4">
               <span>{t('education2')} </span>

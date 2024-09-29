@@ -19,7 +19,8 @@
     "contactSend" : "Send Message",
     "contactSuccess" : "Message sent successfully!",
     "contactError" : "An error occurred while sending the message",
-    "contactMe" : "Contact Me"
+    "contactMe" : "Contact Me",
+    "home" : "Home"
 
 
 
