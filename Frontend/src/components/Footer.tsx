@@ -6,9 +6,9 @@ const Footer = () => {
     const { t } = useTranslation();
 
     return (
-        <div className = "h-72 bg-gray-800 ">
+        <div className = "h-52 bg-gray-800 ">
             <h1 className="text-3xl font-bold text-white py-2 text-center">{t('contactMe')}</h1>
-                <div className="grid grid-cols-2 justify-items-center py-8 max-w-lg mx-auto gap-y-4">
+                <div className="grid grid-cols-2 justify-items-center py-4 max-w-lg mx-auto gap-y-4">
                     <a href="https://www.facebook.com/roland.karczub/" target="_blank" rel="noopener noreferrer" className="flex items-center w-48 ml-10 md:ml-0">
                         <FaFacebook className="cursor-pointer text-white" size={30} />
                         <span className="text-white ml-2">Facebook</span>
@@ -26,10 +26,10 @@ const Footer = () => {
                     <a href="mailto://karczubroland@gmail.com" className="flex items-center w-48 ml-36 md:ml-40">
                         <FaEnvelope className="cursor-pointer text-white" size={30} />
                         <span className="text-white ml-2">Email</span>
-
                     </a>
                 </div>
-            <h1 className="text-lg font-bold text-white py-2 text-center mt-12">2024</h1>
+                <h1 className="text-lg font-bold text-white py-2 text-center flex justify-center">2024</h1>
+            
         </div>
     );
     }
