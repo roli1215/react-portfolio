@@ -65,7 +65,7 @@ const Contact = () => {
         }
         try {
             await axios.post(apiUrl + '/applies/upload', formData);
-            setModalMessage(t('contactMessageSent'));
+            setModalMessage(t('contactSuccess'));
             setShowModal(true);
             setFormData({
                 name : '',
