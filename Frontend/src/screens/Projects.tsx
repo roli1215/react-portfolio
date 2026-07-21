@@ -9,14 +9,15 @@ const Projects = () => {
   const [projects, setProjects] = useState<ProjectDTO[]>([]);
   const apiUrl = import.meta.env.VITE_API_URL as string;
 
-  const {t} = useTranslation();
+  const { t } = useTranslation();
 
   useEffect(() => {
     const fetchProjects = async () => {
       try {
         const response = await axios.get(apiUrl + '/projects');
         setProjects(response.data);
-        
+
+
       } catch (error) {
         console.error(error);
       }
@@ -34,9 +35,9 @@ const Projects = () => {
       </p>
       <div className='grid sm:grid-cols-2 gap-12'>
         {projects.map((project) => (
-          <ProjectItem key = {project._id} img={project.imageId?.imageString} title = {project.title} descriptionHU = {project.descriptionHU} descriptionEN = {project.descriptionEN} language = {project.stack}/>
+          <ProjectItem key={project._id} img={project.imageId?.imageString} title={project.title} descriptionHU={project.descriptionHU} descriptionEN={project.descriptionEN} language={project.stack} />
         ))}
-      
+
       </div>
     </div>
   )
