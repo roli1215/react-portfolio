@@ -139,38 +139,15 @@ const Admin = () => {
         >
           <h2 className="text-2xl font-bold mb-5">New project</h2>
 
-          <input
-            className="border p-3 rounded-lg w-full mb-3"
-            placeholder="Title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
+          <input className="border p-3 rounded-lg w-full mb-3" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
 
-          <input
-            className="border p-3 rounded-lg w-full mb-3"
-            placeholder="React, MongoDB, Docker"
-            value={stack}
-            onChange={(e) => setStack(e.target.value)}
-          />
+          <input className="border p-3 rounded-lg w-full mb-3" placeholder="React, MongoDB, Docker" value={stack} onChange={(e) => setStack(e.target.value)} />
 
-          <textarea
-            className="border p-3 rounded-lg w-full mb-3"
-            placeholder="Hungarian description"
-            value={descriptionHU}
-            onChange={(e) => setDescriptionHU(e.target.value)}
-          />
+          <textarea className="border p-3 rounded-lg w-full mb-3" placeholder="Hungarian description" value={descriptionHU} onChange={(e) => setDescriptionHU(e.target.value)} />
 
-          <textarea
-            className="border p-3 rounded-lg w-full mb-3"
-            placeholder="English description"
-            value={descriptionEN}
-            onChange={(e) => setDescriptionEN(e.target.value)}
-          />
+          <textarea className="border p-3 rounded-lg w-full mb-3" placeholder="English description" value={descriptionEN} onChange={(e) => setDescriptionEN(e.target.value)} />
 
-          <input
-            type="file"
-            onChange={(e) => setImage(e.target.files?.[0] || null)}
-          />
+          <input type="file" onChange={(e) => setImage(e.target.files?.[0] || null)} />
 
           <button
             className="
@@ -186,9 +163,6 @@ const Admin = () => {
             {editId ? "Update project" : "Create project"}
           </button>
         </div>
-
-        {/* PROJECT LIST */}
-
         <h2
           className="
           text-3xl
