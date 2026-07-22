@@ -1,165 +1,89 @@
-import { useState } from "react";
-import axios from "axios";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import Contact from './screens/Contact'
+import Home from './screens/Home'
+import Projects from './screens/Projects'
+import Sidenav from './components/Sidenav'
+import About from './screens/About'
+import Footer from './components/Footer'
+
+import Login from './screens/Login'
+import Admin from './screens/Admin'
+import ProtectedRoute from './components/protectedRoute'
+
+import { LanguageProvider } from './utils/languageContext'
 
 
-const Admin = () => {
+function Portfolio() {
 
-  const apiUrl = import.meta.env.VITE_API_URL as string;
+  return (
+    <div className="w-full overflow-x-hidden">
 
+      <Sidenav />
 
-  const [title, setTitle] = useState("");
-  const [stack, setStack] = useState("");
+      <Home />
 
-  const [descriptionHU, setDescriptionHU] = useState("");
-  const [descriptionEN, setDescriptionEN] = useState("");
+      <div className='max-w-[1200px] m-auto p-4 py-16'>
 
-  const [image, setImage] = useState<File | null>(null);
+        <Projects />
 
+        <About />
 
+        <Contact />
 
-  const uploadImage = async () => {
+      </div>
 
-    if (!image) {
-      throw new Error("No image selected");
-    }
+      <Footer />
 
+    </div>
+  )
 
-    const formData = new FormData();
-
-    formData.append(
-      "image",
-      image
-    );
-
-
-    const response = await axios.post(
-      `${apiUrl}/upload`,
-      formData
-    );
-
-
-    return response.data.image;
-
-  };
-
+}
 
 
 
-  const saveProject = async () => {
-
-    try {
-
-      const imagePath = await uploadImage();
-
-
-      await axios.post(
-        `${apiUrl}/projects`,
-        {
-          title,
-          stack: stack.split(","),
-          descriptionHU,
-          descriptionEN,
-          image: imagePath
-        }
-      );
-
-
-      alert("Project saved");
-
-
-    } catch(error){
-
-      console.error(error);
-
-      alert("Error");
-
-    }
-
-  };
-
-
-
+function App() {
 
   return (
 
-    <div className="p-10">
+    <LanguageProvider>
 
-      <h1 className="text-3xl font-bold mb-8">
-        Admin panel
-      </h1>
+      <BrowserRouter>
 
-
-
-      <input
-        className="border p-2 block mb-4"
-        placeholder="Project title"
-        value={title}
-        onChange={
-          e => setTitle(e.target.value)
-        }
-      />
+        <Routes>
 
 
-
-      <input
-        className="border p-2 block mb-4"
-        placeholder="React, MongoDB, Docker"
-        value={stack}
-        onChange={
-          e => setStack(e.target.value)
-        }
-      />
+          <Route
+            path="/"
+            element={<Portfolio />}
+          />
 
 
-
-      <textarea
-        className="border p-2 block mb-4 w-96"
-        placeholder="Hungarian description"
-        value={descriptionHU}
-        onChange={
-          e => setDescriptionHU(e.target.value)
-        }
-      />
+          <Route
+            path="/login"
+            element={<Login />}
+          />
 
 
-
-      <textarea
-        className="border p-2 block mb-4 w-96"
-        placeholder="English description"
-        value={descriptionEN}
-        onChange={
-          e => setDescriptionEN(e.target.value)
-        }
-      />
-
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute>
+                <Admin />
+              </ProtectedRoute>
+            }
+          />
 
 
-      <input
-        type="file"
-        className="mb-4"
-        onChange={
-          e =>
-          setImage(
-            e.target.files?.[0] ?? null
-          )
-        }
-      />
+        </Routes>
 
+      </BrowserRouter>
 
-
-      <button
-        className="bg-black text-white px-6 py-2"
-        onClick={saveProject}
-      >
-        Save
-      </button>
-
-
-    </div>
+    </LanguageProvider>
 
   )
 
 }
 
 
-export default Admin;
+export default App
