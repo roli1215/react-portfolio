@@ -1,15 +1,37 @@
-import express from 'express';
-import { getProjects, createProject, uploadProjectImage } from '../controllers/projectController';
-import upload from '../middlewares/upload';
+import { Router } from "express";
 
-const router = express.Router();
+import {
+    createProject,
+    getProjects,
+    uploadProjectImage
+} from "../controllers/projectController";
 
-router.get('/projects', getProjects);
-router.post('/projects', createProject);
+import { auth } from "../middlewares/auth";
+import upload from "../middlewares/upload";
+
+
+const router = Router();
+
+
+router.get(
+    "/projects",
+    getProjects
+);
+
+
 router.post(
-    '/upload',
-    upload.single('image'),
+    "/projects",
+    auth,
+    createProject
+);
+
+
+router.post(
+    "/upload",
+    auth,
+    upload.single("image"),
     uploadProjectImage
 );
+
 
 export default router;

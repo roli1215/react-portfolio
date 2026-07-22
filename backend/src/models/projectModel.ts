@@ -1,34 +1,43 @@
 import mongoose from "mongoose";
 
+
 const projectSchema = new mongoose.Schema({
+
   title: {
     type: String,
-    required: true,
+    required: true
   },
 
   stack: {
     type: [String],
-    required: true,
+    required: true
   },
 
   descriptionHU: {
     type: String,
-    required: true,
+    required: true
   },
 
   descriptionEN: {
     type: String,
-    required: true,
+    required: true
   },
 
   image: {
     type: String,
-    required: true,
-  },
+    required: true
+  }
 
-}, { timestamps: true });
+}, {
+  timestamps: true
+});
 
 
-const ProjectModel = mongoose.model('projects', projectSchema);
+const ProjectModel =
+  mongoose.model(
+    "projects",
+    projectSchema
+  );
+
 
 export default ProjectModel;

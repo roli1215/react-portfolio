@@ -29,12 +29,19 @@ const Admin = () => {
 
 
     const response = await axios.post(
-      apiUrl + "/upload",
-      formData
+      `${apiUrl}/upload`,
+      formData,
+      {
+        headers: {
+          Authorization:
+            `Bearer ${localStorage.getItem("token")}`
+        }
+      }
     );
 
 
     return response.data.image;
+
   };
 
 
@@ -45,15 +52,23 @@ const Admin = () => {
 
       const imagePath = await uploadImage();
 
-
+      if (!imagePath) {
+        return;
+      }
       await axios.post(
         apiUrl + "/projects",
         {
           title,
-          stack: stack.split(","),
+          stack: stack.split(",").map(item => item.trim()),
           descriptionHU,
           descriptionEN,
           image: imagePath
+        },
+        {
+          headers: {
+            Authorization:
+              `Bearer ${localStorage.getItem("token")}`
+          }
         }
       );
 
@@ -61,7 +76,7 @@ const Admin = () => {
       alert("Project created");
 
 
-    } catch(error){
+    } catch (error) {
 
       console.error(error);
 
@@ -82,34 +97,34 @@ const Admin = () => {
       <input
         className="border p-2 block my-2"
         placeholder="Title"
-        onChange={(e)=>setTitle(e.target.value)}
+        onChange={(e) => setTitle(e.target.value)}
       />
 
 
       <input
         className="border p-2 block my-2"
         placeholder="React, MongoDB, Docker"
-        onChange={(e)=>setStack(e.target.value)}
+        onChange={(e) => setStack(e.target.value)}
       />
 
 
       <textarea
         className="border p-2 block my-2"
         placeholder="HU description"
-        onChange={(e)=>setDescriptionHU(e.target.value)}
+        onChange={(e) => setDescriptionHU(e.target.value)}
       />
 
 
       <textarea
         className="border p-2 block my-2"
         placeholder="EN description"
-        onChange={(e)=>setDescriptionEN(e.target.value)}
+        onChange={(e) => setDescriptionEN(e.target.value)}
       />
 
 
       <input
         type="file"
-        onChange={(e)=>
+        onChange={(e) =>
           setImage(e.target.files?.[0] || null)
         }
       />
