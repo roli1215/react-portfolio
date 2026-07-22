@@ -1,27 +1,21 @@
-import { Request, Response } from 'express';
-import ProjectModel from '../models/projectModel';
+import { Request, Response } from "express";
+import ProjectModel from "../models/projectModel";
 
 export const getProjects = async (req: Request, res: Response) => {
   try {
     const projects = await ProjectModel.find();
     res.status(200).json(projects);
   } catch (error) {
-    res.status(500).json({ message: (error as Error).message || 'Error fetching projects' });
+    res.status(500).json({ message: (error as Error).message || "Error fetching projects" });
   }
 };
 
 export const createProject = async (req: Request, res: Response) => {
   try {
-    const {
-      title,
-      stack,
-      descriptionHU,
-      descriptionEN,
-      image
-    } = req.body;
+    const { title, stack, descriptionHU, descriptionEN, image } = req.body;
 
     if (!title || !stack || !descriptionHU || !descriptionEN || !image) {
-      return res.status(400).json({ message: 'All fields are required' });
+      return res.status(400).json({ message: "All fields are required" });
     }
 
     const newProject = new ProjectModel({
@@ -33,81 +27,87 @@ export const createProject = async (req: Request, res: Response) => {
     });
     const savedProject = await newProject.save();
 
-    res.status(201).json({ message: 'Project created successfully', project: savedProject });
+    res.status(201).json({ message: "Project created successfully", project: savedProject });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: (error as Error).message || 'Server error' });
+    res.status(500).json({ message: (error as Error).message || "Server error" });
   }
 };
 
-export const uploadProjectImage = async (
-  req: Request,
-  res: Response
-) => {
-
+export const uploadProjectImage = async (req: Request, res: Response) => {
   try {
-
     if (!req.file) {
       return res.status(400).json({
-        message: "No image uploaded"
+        message: "No image uploaded",
       });
     }
 
-
-    const imagePath =
-      `/uploads/projects/${req.file.filename}`;
-
+    const imagePath = `/uploads/projects/${req.file.filename}`;
 
     res.status(200).json({
-      image: imagePath
+      image: imagePath,
     });
-
-
   } catch (error) {
-
     res.status(500).json({
-      message:
-        (error as Error).message
+      message: (error as Error).message,
     });
-
   }
-
 };
 
-export const deleteProject = async (
-  req: Request,
-  res: Response
-) => {
-
+export const updateProject = async (req: Request, res: Response) => {
   try {
-
     const { id } = req.params;
 
+    const { title, stack, descriptionHU, descriptionEN, image } = req.body;
+
+    const updatedProject = await ProjectModel.findByIdAndUpdate(
+      id,
+      {
+        title,
+        stack,
+        descriptionHU,
+        descriptionEN,
+        image,
+      },
+      {
+        new: true,
+      },
+    );
+
+    if (!updatedProject) {
+      return res.status(404).json({
+        message: "Project not found",
+      });
+    }
+
+    res.status(200).json(updatedProject);
+  } catch (error) {
+    res.status(500).json({
+      message: (error as Error).message,
+    });
+  }
+};
+
+export const deleteProject = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
 
     const project = await ProjectModel.findById(id);
 
-
     if (!project) {
       return res.status(404).json({
-        message: "Project not found"
+        message: "Project not found",
       });
     }
 
-
     await ProjectModel.findByIdAndDelete(id);
 
-
     res.status(200).json({
-      message: "Project deleted"
+      message: "Project deleted",
     });
-
-
-  } catch(error){
-
+  } catch (error) {
     res.status(500).json({
-      message:(error as Error).message
+      message: (error as Error).message,
     });
-
   }
-
 };

@@ -1,32 +1,23 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 
-export const auth = (
-    req: Request,
-    res: Response,
-    next: NextFunction
-) => {
+export const auth = (req: Request, res: Response, next: NextFunction) => {
+  const authHeader = req.headers.authorization;
 
-    const authHeader = req.headers.authorization;
+  if (!authHeader) {
+    return res.status(401).json({
+      message: "No token",
+    });
+  }
 
-    if (!authHeader) {
+  const token = authHeader.split(" ")[1];
 
-        return res.status(401).json({
-            message: "No token"
-        });
-    }
-
-    const token = authHeader.split(" ")[1];
-
-    try {
-        jwt.verify(
-            token,
-            process.env.JWT_SECRET!
-        );
-        next();
-    } catch (error) {
-        return res.status(401).json({
-            message: "Invalid token"
-        });
-    }
+  try {
+    jwt.verify(token, process.env.JWT_SECRET!);
+    next();
+  } catch (error) {
+    return res.status(401).json({
+      message: "Invalid token",
+    });
+  }
 };

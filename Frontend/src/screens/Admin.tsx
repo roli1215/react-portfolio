@@ -6,6 +6,7 @@ const Admin = () => {
   const apiUrl = import.meta.env.VITE_API_URL as string;
 
   const [projects, setProjects] = useState<ProjectDTO[]>([]);
+  const [editId, setEditId] = useState<string | null>(null);
 
   const [title, setTitle] = useState("");
   const [stack, setStack] = useState("");
@@ -50,28 +51,42 @@ const Admin = () => {
 
   const createProject = async () => {
     try {
-      const imagePath = await uploadImage();
+      if (editId) {
+        await axios.put(
+          `${apiUrl}/projects/${editId}`,
+          {
+            title,
+            stack: stack.split(",").map((x) => x.trim()),
 
-      if (!imagePath) {
-        return;
-      }
-
-      await axios.post(
-        `${apiUrl}/projects`,
-        {
-          title,
-          stack: stack.split(",").map((x) => x.trim()),
-
-          descriptionHU,
-          descriptionEN,
-          image: imagePath,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
+            descriptionHU,
+            descriptionEN,
           },
-        },
-      );
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        );
+      } else {
+        const imagePath = await uploadImage();
+
+        await axios.post(
+          `${apiUrl}/projects`,
+          {
+            title,
+            stack: stack.split(",").map((x) => x.trim()),
+
+            descriptionHU,
+            descriptionEN,
+            image: imagePath,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        );
+      }
 
       alert("Project created");
 
@@ -85,6 +100,8 @@ const Admin = () => {
     } catch (error) {
       console.error(error);
     }
+
+    setEditId(null);
   };
 
   const deleteProject = async (id: string) => {
@@ -166,7 +183,7 @@ const Admin = () => {
             "
             onClick={createProject}
           >
-            Save project
+            {editId ? "Update project" : "Create project"}
           </button>
         </div>
 
@@ -257,6 +274,25 @@ const Admin = () => {
                 onClick={() => deleteProject(project._id)}
               >
                 Delete
+              </button>
+              <button
+                className="
+border
+px-5
+py-2
+rounded-lg
+ml-3
+"
+                onClick={() => {
+                  setEditId(project._id);
+
+                  setTitle(project.title);
+                  setStack(project.stack.join(", "));
+                  setDescriptionHU(project.descriptionHU);
+                  setDescriptionEN(project.descriptionEN);
+                }}
+              >
+                Edit
               </button>
             </div>
           ))}
