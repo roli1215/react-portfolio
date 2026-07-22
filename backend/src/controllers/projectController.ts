@@ -39,3 +39,37 @@ export const createProject = async (req: Request, res: Response) => {
     res.status(500).json({ message: (error as Error).message || 'Server error' });
   }
 };
+
+export const uploadProjectImage = async (
+  req: Request,
+  res: Response
+) => {
+
+  try {
+
+    if (!req.file) {
+      return res.status(400).json({
+        message: "No image uploaded"
+      });
+    }
+
+
+    const imagePath =
+      `/uploads/projects/${req.file.filename}`;
+
+
+    res.status(200).json({
+      image: imagePath
+    });
+
+
+  } catch (error) {
+
+    res.status(500).json({
+      message:
+        (error as Error).message
+    });
+
+  }
+
+};
