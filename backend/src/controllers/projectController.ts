@@ -73,3 +73,41 @@ export const uploadProjectImage = async (
   }
 
 };
+
+export const deleteProject = async (
+  req: Request,
+  res: Response
+) => {
+
+  try {
+
+    const { id } = req.params;
+
+
+    const project = await ProjectModel.findById(id);
+
+
+    if (!project) {
+      return res.status(404).json({
+        message: "Project not found"
+      });
+    }
+
+
+    await ProjectModel.findByIdAndDelete(id);
+
+
+    res.status(200).json({
+      message: "Project deleted"
+    });
+
+
+  } catch(error){
+
+    res.status(500).json({
+      message:(error as Error).message
+    });
+
+  }
+
+};

@@ -2,6 +2,7 @@ import { Router } from "express";
 
 import {
     createProject,
+    deleteProject,
     getProjects,
     uploadProjectImage
 } from "../controllers/projectController";
@@ -32,6 +33,10 @@ router.post(
     upload.single("image"),
     uploadProjectImage
 );
-
+router.delete(
+    "/projects/:id",
+    auth,
+    deleteProject
+);
 
 export default router;
