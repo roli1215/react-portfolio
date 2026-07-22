@@ -15,6 +15,7 @@ const Projects = () => {
     const fetchProjects = async () => {
       try {
         const response = await axios.get(apiUrl + '/projects');
+        console.log(response.data)
         setProjects(response.data);
         
       } catch (error) {
