@@ -5,7 +5,7 @@ interface ProjectItemProps {
     title: string;
     descriptionHU : string;
     descriptionEN : string;
-    language: string
+    language: string[]
     }
 
 const ProjectItem = ({title, img, descriptionHU, descriptionEN, language} : ProjectItemProps) => {
@@ -20,7 +20,7 @@ const ProjectItem = ({title, img, descriptionHU, descriptionEN, language} : Proj
         <h3 className="text-2xl font-bold text-white tracking-wider text-center underline">
             {title}
         </h3>
-        <h2 className="text-center font-bold m-3 text-base text-gray-300">{language}</h2>
+        <h2 className="text-center font-bold m-3 text-base text-gray-300">{language.join(" • ")}</h2>
         <h2 className="font-bold m-3 text-justify text-xxs md:text-sm  text-gray-300 italic" >
             {description}
         </h2>

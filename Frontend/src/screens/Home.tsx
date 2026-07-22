@@ -9,7 +9,7 @@ const Home = () => {
   return (
     <div id='home'>
         
-      <img src="assets/bg.jpg" alt="background" className="w-full h-screen object-cover "/>
+      <img src="/assets/bg.jpg" alt="background" className="w-full h-screen object-cover "/>
        <div className="w-full h-screen absolute top-0 left-0 bg-white/30">
             <div className="max-w-[1000px] items-center justify-center m-auto h-full w-full flex flex-col lg:items-start ">
                 <h1 className="sm:text-6xl text-5xl font-bold text-gray-800">{t('name')}</h1>

@@ -1,13 +1,11 @@
 
-import { ImageDTO } from "./ImageDTO";
-
 export interface ProjectDTO {
   _id: string;
-  title: string; 
-  stack: string; 
+  title: string;
+  stack: string[];
   descriptionHU: string;
   descriptionEN: string;
-  imageId: ImageDTO;
-  createdAt: string; 
-  updatedAt: string; 
+  image: string;
+  createdAt: string;
+  updatedAt: string;
 }

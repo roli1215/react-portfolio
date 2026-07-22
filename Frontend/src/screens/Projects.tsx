@@ -15,7 +15,6 @@ const Projects = () => {
     const fetchProjects = async () => {
       try {
         const response = await axios.get(apiUrl + '/projects');
-        console.log(response.data)
         setProjects(response.data);
 
 
@@ -36,7 +35,7 @@ const Projects = () => {
       </p>
       <div className='grid sm:grid-cols-2 gap-12'>
         {projects.map((project) => (
-          <ProjectItem key={project._id} img={project.imageId?.imageString} title={project.title} descriptionHU={project.descriptionHU} descriptionEN={project.descriptionEN} language={project.stack} />
+          <ProjectItem key={project._id} img={`${apiUrl}${project.image}`} title={project.title} descriptionHU={project.descriptionHU} descriptionEN={project.descriptionEN} language={project.stack} />
         ))}
 
       </div>
