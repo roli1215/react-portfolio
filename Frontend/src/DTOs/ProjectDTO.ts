@@ -4,7 +4,7 @@ export interface ProjectDTO {
   stack: string[];
   descriptionHU: string;
   descriptionEN: string;
-  image: string;
+  image?: string;
   createdAt: string;
   updatedAt: string;
 }

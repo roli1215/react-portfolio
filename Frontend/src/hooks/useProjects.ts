@@ -35,9 +35,9 @@ const useProjects = () => {
     return response.data.image;
   };
 
-  const createProject = async (data: { title: string; stack: string[]; descriptionHU: string; descriptionEN: string; image: File }) => {
+  const createProject = async (data: { title: string; stack: string[]; descriptionHU: string; descriptionEN: string; image: File | null }) => {
     try {
-      const imagePath = await uploadImage(data.image);
+      const imagePath = await uploadImage(data.image!);
 
       await axios.post(
         `${apiUrl}/projects`,
@@ -62,7 +62,7 @@ const useProjects = () => {
   };
 
   const deleteProject = async (id: string) => {
-    if (!confirm("Delete project?")) {
+    if (!confirm("Törlöd a projektet?")) {
       return;
     }
 

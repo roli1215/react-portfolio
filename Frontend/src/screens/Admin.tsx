@@ -1,78 +1,105 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import useProjects from "../hooks/useProjects";
 import ProjectForm from "../components/admin/ProjectForm";
 import ProjectList from "../components/admin/ProjectList";
+import Toast from "../components/Toast";
+import { ProjectDTO } from "../DTOs/ProjectDTO";
 
 const Admin = () => {
-  const [editId, setEditId] = useState<string | null>(null);
+  const navigate = useNavigate();
 
-  const [title, setTitle] = useState("");
-  const [stack, setStack] = useState("");
-  const [descriptionHU, setDescriptionHU] = useState("");
-  const [descriptionEN, setDescriptionEN] = useState("");
-  const [image, setImage] = useState<File | null>(null);
+  const [form, setForm] = useState({
+    title: "",
+    stack: "",
+    descriptionHU: "",
+    descriptionEN: "",
+    image: null as File | null,
+  });
+
+  const [editId, setEditId] = useState<string | null>(null);
+  const [toast, setToast] = useState("");
 
   const { projects, deleteProject, createProject } = useProjects();
 
+  const showToast = (message: string) => {
+    setToast(message);
+    setTimeout(() => setToast(""), 3000);
+  };
+
   const resetForm = () => {
     setEditId(null);
-    setTitle("");
-    setStack("");
-    setDescriptionHU("");
-    setDescriptionEN("");
-    setImage(null);
+    setForm({
+      title: "",
+      stack: "",
+      descriptionHU: "",
+      descriptionEN: "",
+      image: null,
+    });
   };
 
   const handleSubmit = async () => {
-    if (!image) {
-      alert("Select image");
-      return;
-    }
+    if (!form.image && !editId) return;
 
     await createProject({
-      title,
-      stack: stack.split(",").map((item) => item.trim()),
-      descriptionHU,
-      descriptionEN,
-      image,
+      ...form,
+      stack: form.stack.split(",").map((item) => item.trim()),
     });
 
+    showToast(editId ? "Sikeres projekt módosítás!" : "Sikeres projekt létrehozás!");
     resetForm();
   };
 
-  const handleEdit = (project: any) => {
+  const handleDelete = async (id: string) => {
+    await deleteProject(id);
+    showToast("Sikeres projekt törlés!");
+  };
+
+  const handleEdit = (project: ProjectDTO) => {
     setEditId(project._id);
 
-    setTitle(project.title);
-    setStack(project.stack.join(", "));
-    setDescriptionHU(project.descriptionHU);
-    setDescriptionEN(project.descriptionEN);
+    setForm({
+      title: project.title,
+      stack: project.stack.join(", "),
+      descriptionHU: project.descriptionHU,
+      descriptionEN: project.descriptionEN,
+      image: null,
+    });
+  };
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    showToast("Kijelentkezve!");
+
+    setTimeout(() => navigate("/login"), 800);
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-10">
-      <div className="max-w-6xl mx-auto">
-        <h1 className="text-4xl font-bold mb-10">Admin Dashboard</h1>
+    <div className="min-h-screen bg-gray-100 p-6 md:p-10 animate-fadeIn">
+      {toast && <Toast message={toast} />}
 
-        <ProjectForm
-          editId={editId}
-          title={title}
-          setTitle={setTitle}
-          stack={stack}
-          setStack={setStack}
-          descriptionHU={descriptionHU}
-          setDescriptionHU={setDescriptionHU}
-          descriptionEN={descriptionEN}
-          setDescriptionEN={setDescriptionEN}
-          image={image}
-          setImage={setImage}
-          onSubmit={handleSubmit}
-          onCancel={resetForm}
-        />
+      <div className="max-w-7xl mx-auto">
+        <div className="bg-white rounded-3xl shadow-lg p-6 mb-10 flex items-center justify-between">
+          <div>
+            <h1 className="text-4xl font-bold">Admin kezelőfelület</h1>
+            <p className="text-gray-500 mt-2">Projektjeid egyszerű kezelése</p>
+          </div>
 
-        <h2 className="text-3xl font-bold mt-12 mb-6">Projects</h2>
+          <button className="bg-red-600 text-white px-6 py-3 rounded-xl transition hover:bg-red-700 hover:scale-105 active:scale-95" onClick={logout}>
+            Kijelentkezés
+          </button>
+        </div>
 
-        <ProjectList projects={projects} onDelete={deleteProject} onEdit={handleEdit} />
+        <div className="bg-white rounded-3xl shadow-lg p-6 md:p-8 mb-12 hover:shadow-xl transition">
+          <h2 className="text-2xl font-bold mb-6">{editId ? "Projekt módosítás" : "Projekt létrehozás"}</h2>
+
+          <ProjectForm editId={editId} form={form} setForm={setForm} onSubmit={handleSubmit} onCancel={resetForm} />
+        </div>
+
+        <h2 className="text-3xl font-bold mb-6">Projektek</h2>
+
+        <ProjectList projects={projects} onDelete={handleDelete} onEdit={handleEdit} />
       </div>
     </div>
   );
