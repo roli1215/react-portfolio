@@ -20,6 +20,8 @@ services:
       - ./backend/.env
     ports:
       - "127.0.0.1:3000:3000"
+    volumes:
+      - uploads_data:/app/uploads
     depends_on:
       - mongo
     networks:
@@ -43,3 +45,5 @@ networks:
 volumes:
   mongo_data:
     name: react-portfolio_mongo_data
+  uploads_data:
+    name: react-portfolio_uploads
