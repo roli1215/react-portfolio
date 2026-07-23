@@ -4,9 +4,9 @@ services:
     container_name: portfolio-mongo
     restart: always
     environment:
-      MONGO_INITDB_ROOT_USERNAME: "admin"
-      MONGO_INITDB_ROOT_PASSWORD: "mongoRoliRoot23"
-      MONGO_INITDB_DATABASE: portfolio
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGO_DATABASE}
     volumes:
       - mongo_data:/data/db
     networks:
@@ -16,9 +16,8 @@ services:
     build: ./backend
     container_name: portfolio-backend
     restart: always
-    environment:
-      PORT: 3000
-      MONGO_URL: "mongodb://admin:mongoRoliRoot23@mongo:27017/portfolio?authSource=admin"
+    env_file:
+      - ./backend/.env
     ports:
       - "127.0.0.1:3000:3000"
     depends_on:
