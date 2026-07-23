@@ -1,5 +1,7 @@
 import { Request, Response } from "express";
 import ProjectModel from "../models/projectModel";
+import fs from "fs";
+import path from "path";
 
 export const getProjects = async (req: Request, res: Response) => {
   try {
@@ -100,12 +102,22 @@ export const deleteProject = async (req: Request, res: Response) => {
       });
     }
 
+    if (project.image) {
+      const imagePath = path.join(process.cwd(), project.image.replace("/", ""));
+
+      if (fs.existsSync(imagePath)) {
+        fs.unlinkSync(imagePath);
+      }
+    }
+
     await ProjectModel.findByIdAndDelete(id);
 
     res.status(200).json({
       message: "Project deleted",
     });
   } catch (error) {
+    console.error(error);
+
     res.status(500).json({
       message: (error as Error).message,
     });

@@ -6,10 +6,12 @@ interface ProjectCardProps {
   onEdit: (project: ProjectDTO) => void;
 }
 
+const apiUrl = import.meta.env.VITE_API_URL as string;
+
 const ProjectCard = ({ project, onDelete, onEdit }: ProjectCardProps) => {
   return (
     <div className="bg-white rounded-2xl shadow-lg p-5">
-      <img src={project.image} className="w-full h-52 object-cover rounded-xl" />
+      <img src={`${apiUrl}${project.image}`} alt={project.title} className="w-full h-52 object-cover rounded-xl" />
 
       <h3 className="text-2xl font-bold mt-4">{project.title}</h3>
 
