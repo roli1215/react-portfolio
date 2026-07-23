@@ -1,0 +1,46 @@
+services:
+  mongo:
+    image: mongo:8
+    container_name: portfolio-mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: "admin"
+      MONGO_INITDB_ROOT_PASSWORD: "mongoRoliRoot23"
+      MONGO_INITDB_DATABASE: portfolio
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - proxy
+
+  backend:
+    build: ./backend
+    container_name: portfolio-backend
+    restart: always
+    environment:
+      PORT: 3000
+      MONGO_URL: "mongodb://admin:mongoRoliRoot23@mongo:27017/portfolio?authSource=admin"
+    ports:
+      - "127.0.0.1:3000:3000"
+    depends_on:
+      - mongo
+    networks:
+      - proxy
+
+  frontend:
+    build: ./Frontend
+    container_name: portfolio-frontend
+    restart: always
+    ports:
+      - "127.0.0.1:4173:4173"
+    depends_on:
+      - backend
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true
+
+volumes:
+  mongo_data:
+    name: react-portfolio_mongo_data
