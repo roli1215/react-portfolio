@@ -62,34 +62,44 @@ export const updateProject = async (req: Request, res: Response) => {
 
     const { title, stack, descriptionHU, descriptionEN, image } = req.body;
 
-    const updatedProject = await ProjectModel.findByIdAndUpdate(
-      id,
-      {
-        title,
-        stack,
-        descriptionHU,
-        descriptionEN,
-        image,
-      },
-      {
-        new: true,
-      },
-    );
+    const project = await ProjectModel.findById(id);
 
-    if (!updatedProject) {
+    if (!project) {
       return res.status(404).json({
         message: "Project not found",
       });
     }
 
+    const updateData: any = {
+      title,
+      stack,
+      descriptionHU,
+      descriptionEN,
+    };
+
+    if (image && project.image) {
+      const oldImagePath = path.join(process.cwd(), project.image);
+
+      if (fs.existsSync(oldImagePath)) {
+        fs.unlinkSync(oldImagePath);
+      }
+
+      updateData.image = image;
+    }
+
+    const updatedProject = await ProjectModel.findByIdAndUpdate(id, updateData, {
+      new: true,
+    });
+
     res.status(200).json(updatedProject);
   } catch (error) {
+    console.error(error);
+
     res.status(500).json({
       message: (error as Error).message,
     });
   }
 };
-
 export const deleteProject = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;

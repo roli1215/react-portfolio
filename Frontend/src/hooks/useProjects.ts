@@ -61,6 +61,45 @@ const useProjects = () => {
     }
   };
 
+  const updateProject = async (
+    id: string,
+    data: {
+      title: string;
+      stack: string[];
+      descriptionHU: string;
+      descriptionEN: string;
+      image: File | null;
+    },
+  ) => {
+    try {
+      let imagePath;
+
+      if (data.image) {
+        imagePath = await uploadImage(data.image);
+      }
+
+      await axios.put(
+        `${apiUrl}/projects/${id}`,
+        {
+          title: data.title,
+          stack: data.stack,
+          descriptionHU: data.descriptionHU,
+          descriptionEN: data.descriptionEN,
+          ...(imagePath && { image: imagePath }),
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${getToken()}`,
+          },
+        },
+      );
+
+      loadProjects();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const deleteProject = async (id: string) => {
     if (!confirm("Törlöd a projektet?")) {
       return;
@@ -87,6 +126,7 @@ const useProjects = () => {
     projects,
     loadProjects,
     createProject,
+    updateProject,
     deleteProject,
     uploadImage,
   };

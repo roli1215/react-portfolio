@@ -21,15 +21,19 @@ const Admin = () => {
   const [editId, setEditId] = useState<string | null>(null);
   const [toast, setToast] = useState("");
 
-  const { projects, deleteProject, createProject } = useProjects();
+  const { projects, deleteProject, createProject, updateProject } = useProjects();
 
   const showToast = (message: string) => {
     setToast(message);
-    setTimeout(() => setToast(""), 3000);
+
+    setTimeout(() => {
+      setToast("");
+    }, 3000);
   };
 
   const resetForm = () => {
     setEditId(null);
+
     setForm({
       title: "",
       stack: "",
@@ -40,19 +44,34 @@ const Admin = () => {
   };
 
   const handleSubmit = async () => {
-    if (!form.image && !editId) return;
+    if (!form.image && !editId) {
+      return;
+    }
 
-    await createProject({
-      ...form,
+    const data = {
+      title: form.title,
       stack: form.stack.split(",").map((item) => item.trim()),
-    });
+      descriptionHU: form.descriptionHU,
+      descriptionEN: form.descriptionEN,
+      image: form.image,
+    };
 
-    showToast(editId ? "Sikeres projekt módosítás!" : "Sikeres projekt létrehozás!");
+    if (editId) {
+      await updateProject(editId, data);
+
+      showToast("Sikeres projekt módosítás!");
+    } else {
+      await createProject(data);
+
+      showToast("Sikeres projekt létrehozás!");
+    }
+
     resetForm();
   };
 
   const handleDelete = async (id: string) => {
     await deleteProject(id);
+
     showToast("Sikeres projekt törlés!");
   };
 
@@ -70,9 +89,12 @@ const Admin = () => {
 
   const logout = () => {
     localStorage.removeItem("token");
+
     showToast("Kijelentkezve!");
 
-    setTimeout(() => navigate("/login"), 800);
+    setTimeout(() => {
+      navigate("/login");
+    }, 800);
   };
 
   return (
@@ -83,6 +105,7 @@ const Admin = () => {
         <div className="bg-white rounded-3xl shadow-lg p-6 mb-10 flex items-center justify-between">
           <div>
             <h1 className="text-4xl font-bold">Admin kezelőfelület</h1>
+
             <p className="text-gray-500 mt-2">Projektjeid egyszerű kezelése</p>
           </div>
 
