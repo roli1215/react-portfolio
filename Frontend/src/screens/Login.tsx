@@ -1,18 +1,27 @@
 import { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import api from "../api/axios";
 
 const Login = () => {
-  const apiUrl = import.meta.env.VITE_API_URL as string;
-
   const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const login = async () => {
+    setError("");
+
+    if (!username || !password) {
+      setError("Felhasználónév és jelszó kötelező");
+      return;
+    }
+
     try {
-      const response = await axios.post(`${apiUrl}/auth/login`, {
+      setLoading(true);
+
+      const response = await api.post("/auth/login", {
         username,
         password,
       });
@@ -21,24 +30,43 @@ const Login = () => {
 
       navigate("/admin");
     } catch (error) {
-      console.error(error);
-
-      alert("Hibás felhasználónév vagy jelszó");
+      setError("Hibás felhasználónév vagy jelszó");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="border p-8 rounded-lg">
-        <h1 className="text-3xl font-bold mb-6">Admin login</h1>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-black to-gray-800">
+      <div className="w-full max-w-md bg-white rounded-3xl shadow-2xl p-10 animate-fadeIn">
+        <h1 className="text-4xl font-bold text-center mb-8">Bejelentkezés</h1>
 
-        <input className="border p-2 block mb-4" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
+        <div className="space-y-5">
+          <input
+            className="w-full border rounded-xl px-4 py-3 outline-none transition-all duration-300 focus:ring-2 focus:ring-black focus:scale-[1.02]"
+            placeholder="Felhasználó név"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
 
-        <input className="border p-2 block mb-4" type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <input
+            className="w-full border rounded-xl px-4 py-3 outline-none transition-all duration-300 focus:ring-2 focus:ring-black focus:scale-[1.02]"
+            type="password"
+            placeholder="Jelszó"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
 
-        <button className="bg-black text-white px-6 py-2 rounded" onClick={login}>
-          Login
-        </button>
+          {error && <p className="text-red-600 text-sm">{error}</p>}
+
+          <button
+            className="w-full bg-black text-white py-3 rounded-xl font-semibold transition-all duration-300 hover:bg-gray-800 hover:scale-[1.02] active:scale-95 disabled:opacity-50"
+            disabled={loading}
+            onClick={login}
+          >
+            {loading ? "Bejelentkezés folyamatban.." : "Belépés"}
+          </button>
+        </div>
       </div>
     </div>
   );
