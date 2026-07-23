@@ -24,3 +24,9 @@ export const login = (req: Request, res: Response) => {
     token,
   });
 };
+
+export const me = (req: Request, res: Response) => {
+  res.json({
+    authenticated: true,
+  });
+};
