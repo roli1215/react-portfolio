@@ -11,6 +11,7 @@ app.use(express.json());
 app.use("/uploads", express.static("uploads"));
 
 app.use("/auth", authRoutes);
-app.use(appliesRoutes);
+
+app.use("/applies", appliesRoutes);
 app.use(projectRoutes);
 export default app;
