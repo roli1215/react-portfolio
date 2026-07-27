@@ -1,9 +1,14 @@
 import axios from "axios";
 import { useState } from "react";
-import { nameRegex, phoneRegex, emailRegex, subjectRegex } from "../utils/Validation";
 import { useTranslation } from "react-i18next";
 
+import { nameRegex, phoneRegex, emailRegex, subjectRegex } from "../utils/Validation";
+import ContactInput from "../components/ContactInput";
+
 const Contact = () => {
+  const { t } = useTranslation();
+  const apiUrl = import.meta.env.VITE_API_URL;
+
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -20,62 +25,39 @@ const Contact = () => {
   });
 
   const [focusedField, setFocusedField] = useState<string | null>(null);
+  const [modal, setModal] = useState("");
 
-  const [showModal, setShowModal] = useState(false);
-  const [modalMessage, setModalMessage] = useState("");
-
-  const apiUrl = import.meta.env.VITE_API_URL as string;
+  const fields = [
+    { name: "name", label: t("contactName"), regex: nameRegex, error: t("nameError") },
+    { name: "phone", label: t("contactPhone"), regex: phoneRegex, error: t("phoneError") },
+    { name: "email", label: t("contactEmail"), type: "email", regex: emailRegex, error: t("emailError") },
+    { name: "subject", label: t("contactSubject"), regex: subjectRegex, error: t("subjectError") },
+  ];
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
 
-    if (e.target.name === "name" && !nameRegex.test(e.target.value)) {
-      setErrors((prev) => ({ ...prev, name: t("nameError") }));
-    } else if (e.target.name === "phone" && !phoneRegex.test(e.target.value)) {
-      setErrors((prev) => ({ ...prev, phone: t("phoneError") }));
-    } else if (e.target.name === "email" && !emailRegex.test(e.target.value)) {
-      setErrors((prev) => ({ ...prev, email: t("emailError") }));
-    } else if (e.target.name === "subject" && !subjectRegex.test(e.target.value)) {
-      setErrors((prev) => ({ ...prev, subject: t("subjectError") }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
+
+    const field = fields.find((x) => x.name === name);
+
+    if (field && !field.regex.test(value)) {
+      setErrors((prev) => ({ ...prev, [name]: field.error }));
     } else {
-      setErrors((prev) => ({ ...prev, [e.target.name]: "" }));
+      setErrors((prev) => ({ ...prev, [name]: "" }));
     }
-  };
-
-  const handleFocus = (fieldName: string) => {
-    setFocusedField(fieldName);
-  };
-
-  const handleBlur = () => {
-    setFocusedField(null);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!nameRegex.test(formData.name)) {
-      setErrors((prev) => ({ ...prev, name: t("nameError") }));
-      return;
-    }
-    if (!phoneRegex.test(formData.phone)) {
-      setErrors((prev) => ({ ...prev, phone: t("phoneError") }));
-      return;
-    }
-    if (!emailRegex.test(formData.email)) {
-      setErrors((prev) => ({ ...prev, email: t("emailError") }));
-      return;
-    }
-    if (!subjectRegex.test(formData.subject)) {
-      setErrors((prev) => ({ ...prev, subject: t("subjectError") }));
-      return;
-    }
+    if (Object.values(errors).some(Boolean)) return;
+
     try {
-      await axios.post(apiUrl + "/applies/upload", formData);
-      setModalMessage(t("contactSuccess"));
-      setShowModal(true);
+      await axios.post(`${apiUrl}/applies/upload`, formData);
+
+      setModal(t("contactSuccess"));
+
       setFormData({
         name: "",
         phone: "",
@@ -83,104 +65,61 @@ const Contact = () => {
         subject: "",
         message: "",
       });
-    } catch (error) {
-      setModalMessage(t("contactMessageError"));
-      setShowModal(true);
+    } catch {
+      setModal(t("contactMessageError"));
     }
   };
 
-  const closeModal = () => {
-    setShowModal(false);
-  };
-
-  const { t } = useTranslation();
-
   return (
     <div id="contact">
-      <h1 className="text-4xl font-bold text-left text-[#000] ">{t("contact")}</h1>
-      <div className="w-full h-[2px] bg-black mt-2"></div>
-      <form onSubmit={handleSubmit} method="POST" encType="multipart/form-data">
-        <div className="grid md:grid-cols-2 gap-4 w-full py-2">
-          <div className="flex flex-col">
-            <label className="uppercase text-sm py-2 font-bold">{t("contactName")}</label>
-            <input
-              className="border-2 rounded-lg p-3 flex border-gray-300"
-              type="text"
-              name="name"
-              value={formData.name}
+      <h1 className="text-4xl font-bold">{t("contact")}</h1>
+
+      <div className="w-full h-[2px] bg-black mt-2" />
+
+      <form onSubmit={handleSubmit}>
+        <div className="grid md:grid-cols-2 gap-4 py-2">
+          {fields.slice(0, 2).map((field) => (
+            <ContactInput
+              key={field.name}
+              {...field}
+              value={formData[field.name as keyof typeof formData]}
+              error={errors[field.name as keyof typeof errors]}
+              focusedField={focusedField}
               onChange={handleChange}
-              onFocus={() => handleFocus("name")}
-              onBlur={handleBlur}
-              required
+              onFocus={setFocusedField}
+              onBlur={() => setFocusedField(null)}
             />
-            {errors.name && focusedField === "name" && <p className="text-red-500 font-bold text-xs">{errors.name}</p>}
-          </div>
-          <div className="flex flex-col">
-            <label className="uppercase text-sm py-2 font-bold">{t("contactPhone")}</label>
-            <input
-              className="border-2 rounded-lg p-3 flex border-gray-300"
-              type="text"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              onFocus={() => handleFocus("phone")}
-              onBlur={handleBlur}
-              required
-            />
-            {errors.phone && focusedField === "phone" && <p className="text-red-500 font-bold text-xs">{errors.phone}</p>}
-            <label className="text-xs text-gray-400"></label>
-          </div>
+          ))}
         </div>
-        <div className="flex flex-col py-2">
-          <label className="uppercase text-sm py-2 font-bold">{t("contactEmail")}</label>
-          <input
-            className="border-2 rounded-lg p-3 flex border-gray-300"
-            type="email"
-            name="email"
-            value={formData.email}
+
+        {fields.slice(2).map((field) => (
+          <ContactInput
+            key={field.name}
+            {...field}
+            value={formData[field.name as keyof typeof formData]}
+            error={errors[field.name as keyof typeof errors]}
+            focusedField={focusedField}
             onChange={handleChange}
-            onFocus={() => handleFocus("email")}
-            onBlur={handleBlur}
-            required
+            onFocus={setFocusedField}
+            onBlur={() => setFocusedField(null)}
           />
-          {errors.email && focusedField === "email" && <p className="text-red-500 font-bold text-xs">{errors.email}</p>}
-        </div>
-        <div className="flex flex-col py-2">
-          <label className="uppercase text-sm py-2 font-bold">{t("contactSubject")}</label>
-          <input
-            className="border-2 rounded-lg p-3 flex border-gray-300"
-            type="text"
-            name="subject"
-            value={formData.subject}
-            onChange={handleChange}
-            onFocus={() => handleFocus("subject")}
-            onBlur={handleBlur}
-            required
-          />
-          {errors.subject && focusedField === "subject" && <p className="text-red-500 font-bold text-xs">{errors.subject}</p>}
-        </div>
+        ))}
+
         <div className="flex flex-col py-2">
           <label className="uppercase text-sm py-2 font-bold">{t("contactMessage")}</label>
-          <textarea
-            className="border-2 rounded-lg p-3 border-gray-300"
-            rows={10}
-            name="message"
-            value={formData.message}
-            onChange={handleChange}
-            onFocus={() => handleFocus("message")}
-            onBlur={handleBlur}
-            required
-          ></textarea>
+
+          <textarea className="border-2 rounded-lg p-3 border-gray-300" rows={8} name="message" value={formData.message} onChange={handleChange} required />
         </div>
-        <button className="bg-[#000] text-gray-100 mt-4 w-full p-4 rounded-lg font-bold" type="submit">
-          {t("contactSend")}
-        </button>
+
+        <button className="bg-black text-white p-4 rounded-lg font-bold w-full mt-4">{t("contactSend")}</button>
       </form>
-      {showModal && (
-        <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full text-center">
-            <p className="mb-4">{modalMessage}</p>
-            <button onClick={closeModal} className="bg-black text-white py-2 px-4 rounded-lg font-bold">
+
+      {modal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center">
+          <div className="bg-white p-8 rounded-xl">
+            <p>{modal}</p>
+
+            <button className="mt-4 bg-black text-white px-4 py-2 rounded" onClick={() => setModal("")}>
               OK
             </button>
           </div>
