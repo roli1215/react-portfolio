@@ -1,27 +1,34 @@
 import React from "react";
 
-interface Props {
+type Props = {
   label: string;
   name: string;
   value: string;
+  focused: boolean;
   error?: string;
-  focusedField: string | null;
   type?: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onFocus: (name: string) => void;
+  textarea?: boolean;
+
+  onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+
+  onFocus: () => void;
   onBlur: () => void;
-}
-
-const ContactInput = ({ label, name, value, error, focusedField, type = "text", onChange, onFocus, onBlur }: Props) => {
-  return (
-    <div className="flex flex-col">
-      <label className="uppercase text-sm py-2 font-bold">{label}</label>
-
-      <input className="border-2 rounded-lg p-3 border-gray-300" type={type} name={name} value={value} onChange={onChange} onFocus={() => onFocus(name)} onBlur={onBlur} required />
-
-      {error && focusedField === name && <p className="text-red-500 font-bold text-xs">{error}</p>}
-    </div>
-  );
 };
 
-export default ContactInput;
+const classes = "border-2 border-gray-300 rounded-lg p-3";
+
+export default function ContactInput({ label, name, value, focused, error, type = "text", textarea, onChange, onFocus, onBlur }: Props) {
+  return (
+    <div className="flex flex-col py-2">
+      <label className="uppercase text-sm font-bold py-2">{label}</label>
+
+      {textarea ? (
+        <textarea rows={10} className={classes} name={name} value={value} onChange={onChange} onFocus={onFocus} onBlur={onBlur} required />
+      ) : (
+        <input className={classes} type={type} name={name} value={value} onChange={onChange} onFocus={onFocus} onBlur={onBlur} required />
+      )}
+
+      {focused && error && <p className="text-xs text-red-500 font-bold mt-1">{error}</p>}
+    </div>
+  );
+}

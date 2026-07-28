@@ -1,8 +1,8 @@
 import express from "express";
-import { postApply } from "../controllers/appliesController";
+import { sendApply } from "../controllers/appliesController";
 
 const router = express.Router();
 
-router.post("/upload", postApply);
+router.post("/contact", sendApply);
 
 export default router;
