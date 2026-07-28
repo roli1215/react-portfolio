@@ -27,6 +27,7 @@ const Contact = () => {
   const [focusedField, setFocusedField] = useState<string | null>(null);
   const [modalMessage, setModalMessage] = useState("");
   const [showModal, setShowModal] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const validation = {
     name: {
@@ -94,7 +95,7 @@ const Contact = () => {
         ...p,
         subject: t("subjectError"),
       }));
-
+    setLoading(true);
     try {
       const { data } = await axios.post(`${apiUrl}/applies/contact`, formData);
 
@@ -112,6 +113,8 @@ const Contact = () => {
       setModalMessage(err.response?.data?.message ?? t("contactError"));
 
       setShowModal(true);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -180,8 +183,8 @@ const Contact = () => {
           onBlur={handleBlur}
         />
 
-        <button type="submit" className="w-full bg-black text-white mt-4 p-4 rounded-lg font-bold">
-          {t("contactSend")}
+        <button type="submit" className="w-full bg-black text-white mt-4 p-4 rounded-lg font-bold" disabled={loading}>
+          {loading ? "Küldés folyamatban.." : t("contactSend")}
         </button>
       </form>
 
