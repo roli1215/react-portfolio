@@ -8,17 +8,29 @@ interface ProjectItemProps {
   language: string[];
 }
 
-const ProjectItem = ({ title, img, descriptionHU, descriptionEN, language }: ProjectItemProps) => {
+const ProjectItem = ({ img, title, descriptionHU, descriptionEN, language }: ProjectItemProps) => {
   const { currentLanguage } = useLanguage();
+
   const description = currentLanguage === "en" ? descriptionEN : descriptionHU;
 
   return (
-    <div className="relative flex items-center justify-center h-auto w-full shadow-xl shadow-gray-600 rounded-xl group hover:bg-gradient-to-r from-gray-800 to-[#2b2a2a] cursor-pointer">
-      <img src={img} alt={title} className="rounded-xl group-hover:opacity-10" />
-      <div className="hidden group-hover:block absolute top-[50%] left-[15%] translate-x-[-10%] translate-y-[-50%]">
-        <h3 className="text-2xl font-bold text-white tracking-wider text-center underline">{title}</h3>
-        <h2 className="text-center font-bold m-3 text-base text-gray-300">{language.join(" • ")}</h2>
-        <h2 className="font-bold m-3 text-justify text-xxs md:text-sm  text-gray-300 italic">{description}</h2>
+    <div className="group rounded-xl overflow-hidden shadow-lg hover:-translate-y-2 transition-all duration-300 bg-white">
+      <div className="overflow-hidden h-60">
+        <img src={img} alt={title} className="w-full h-full object-cover group-hover:scale-110 transition duration-500" />
+      </div>
+
+      <div className="p-5">
+        <h3 className="text-2xl font-bold mb-3">{title}</h3>
+
+        <div className="flex flex-wrap gap-2 mb-4">
+          {language.map((item) => (
+            <span key={item} className="bg-gray-200 px-3 py-1 rounded-full text-sm font-semibold">
+              {item}
+            </span>
+          ))}
+        </div>
+
+        <p className="text-gray-600 text-sm line-clamp-4 leading-6">{description}</p>
       </div>
     </div>
   );

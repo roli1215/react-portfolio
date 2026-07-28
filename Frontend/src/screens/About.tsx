@@ -4,40 +4,73 @@ import SkillsItem from "../components/SkillsItem";
 const About = () => {
   const { t } = useTranslation();
 
+  const skills = [
+    ["React", "/assets/react.svg"],
+    ["TypeScript", "/assets/typescript.svg"],
+    ["JavaScript", "/assets/javascript.svg"],
+    ["Angular", "/assets/angular.svg"],
+    ["Python", "/assets/python.svg"],
+    ["Java", "/assets/java.svg"],
+    ["C", "/assets/c.svg"],
+    ["MongoDB", "/assets/mongodb.svg"],
+    ["PostgreSQL", "/assets/postgresql.svg"],
+    ["CSS", "/assets/css.svg"],
+    ["Tailwind", "/assets/tailwindcss.svg"],
+    ["Docker", "/assets/docker.svg"],
+    ["Swagger", "/assets/swagger.svg"],
+    ["Git", "/assets/git.svg"],
+    ["HTML", "/assets/html.svg"],
+  ];
+
   return (
-    <div id="about">
-      <h1 className="text-4xl mt-4 font-bold text-left text-[#000000] ">{t("about")}</h1>
-      <div className="w-full h-[2px] bg-black mt-2"></div>
-      <p className="font-bold py-8 text-justify">{t("aboutText")}</p>
-      <h1 className="text-3xl font-bold  text-[#000000] ">{t("education")}</h1>
-      <div className="w-full h-[2px] bg-black mt-2"></div>
-      <div className="flex justify-between font-bold py-4">
-        <span>{t("education1")}</span>
-        <span className="ml-12">2021-2024</span>
+    <section id="about" className="py-10">
+      <h1 className="text-4xl font-bold">{t("about")}</h1>
+      <div className="h-[2px] bg-black mt-3 mb-8" />
+      <div className="grid lg:grid-cols-2 gap-10">
+        <div className="bg-gray-100 rounded-xl p-6 shadow-md">
+          <h2 className="text-3xl font-bold mb-4">Roland Karczub</h2>
+          <div className="space-y-3 mb-6 text-gray-700">
+            <p>Frontend {t("develop")}</p>
+            <p>Nemzeti Adó- és Vámhivatal Informatikai Intézet</p>
+          </div>
+          <p className="text-gray-700 leading-7 text-justify">{t("aboutText")}</p>
+          <div className="flex flex-wrap gap-2 mt-6">
+            {["Angular", "React", "TypeScript", "Node.js"].map((item) => (
+              <span key={item} className=" bg-black text-white px-3 py-1 rounded-full text-sm">
+                {item}
+              </span>
+            ))}
+          </div>
+        </div>
+        <div className="bg-gray-100 rounded-xl p-6 shadow-md">
+          <h2 className="text-2xl font-bold mb-5">{t("education")}</h2>
+          <div className="border-l-4 border-black pl-5 space-y-6">
+            <div>
+              <h3 className="font-bold text-lg">{t("education1")}</h3>
+              <p className="text-gray-600">2021 - 2024</p>
+            </div>
+            <div>
+              <h3 className="font-bold text-lg">{t("education2")}</h3>
+              <p className="text-gray-600">2017 - 2021</p>
+            </div>
+          </div>
+        </div>
       </div>
-      <div className="flex justify-between font-bold py-4">
-        <span>{t("education2")} </span>
-        <span>2017-2021</span>
+      <h2 className="text-3xl font-bold mt-16">{t("work")}</h2>
+      <div className="h-[2px] bg-black mt-3 mb-8" />
+      <div className="bg-gray-100 rounded-xl p-6 shadow-md border-l-4 border-black">
+        <h3 className="text-xl font-bold">Nemzeti Adó- és Vámhivatal</h3>
+        <p className="font-semibold text-gray-700 mt-1">Angular {t("develop")}</p>
+        <p className="text-gray-600 mt-2">2024. November - Jelenleg</p>
       </div>
-      <h1 className="text-3xl font-bold text-[#000000]">{t("experience")}</h1>
-      <div className="w-full h-[2px] bg-black mt-2"></div>
-      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-8 py-4">
-        <SkillsItem img="/assets/react.svg"></SkillsItem>
-        <SkillsItem img="/assets/typescript.svg"></SkillsItem>
-        <SkillsItem img="/assets/javascript.svg"></SkillsItem>
-        <SkillsItem img="/assets/python.svg"></SkillsItem>
-        <SkillsItem img="/assets/java.svg"></SkillsItem>
-        <SkillsItem img="/assets/c.svg"></SkillsItem>
-        <SkillsItem img="/assets/mongodb.svg"></SkillsItem>
-        <SkillsItem img="/assets/postgresql.svg"></SkillsItem>
-        <SkillsItem img="/assets/css.svg"></SkillsItem>
-        <SkillsItem img="/assets/tailwindcss.svg"></SkillsItem>
-        <SkillsItem img="/assets/docker.svg"></SkillsItem>
-        <SkillsItem img="/assets/swagger.svg"></SkillsItem>
-        <SkillsItem img="/assets/git.svg"></SkillsItem>
-        <SkillsItem img="/assets/html.svg"></SkillsItem>
+      <h2 className="text-3xl font-bold mt-16">Skills</h2>
+      <div className="h-[2px] bg-black mt-3 mb-8" />
+      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 gap-8">
+        {skills.map(([name, img]) => (
+          <SkillsItem key={name} name={name} img={img} />
+        ))}
       </div>
-    </div>
+    </section>
   );
 };
 
