@@ -12,6 +12,7 @@
   "dependencies": {
     "@types/react-native-dotenv": "^0.2.2",
     "axios": "^1.7.7",
+    "framer-motion": "^12.43.0",
     "i18next": "^23.15.1",
     "react": "^18.3.1",
     "react-country-flag": "^3.1.0",

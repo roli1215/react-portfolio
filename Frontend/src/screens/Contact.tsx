@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 
 import ContactInput from "../components/ContactInput";
 import { emailRegex, nameRegex, phoneRegex, subjectRegex } from "../utils/Validation";
+import AnimatedSection from "../components/AnimatedSection";
 
 const Contact = () => {
   const { t } = useTranslation();
@@ -119,87 +120,117 @@ const Contact = () => {
   };
 
   return (
-    <div id="contact">
-      <h1 className="text-4xl font-bold">{t("contact")}</h1>
+    <AnimatedSection>
+      <section id="contact" className="py-10">
+        <h1 className="text-4xl font-bold">{t("contact")}</h1>
+        <div className="h-[2px] bg-black mt-3 mb-10" />
 
-      <div className="w-full h-[2px] bg-black mt-2 mb-4" />
+        <div className="grid lg:grid-cols-2 gap-12">
+          <div className="bg-gray-100 rounded-2xl shadow-lg p-8 flex flex-col justify-center">
+            <h2 className="text-3xl font-bold mb-6">{t("letswork")}</h2>
+            <div className="space-y-6">
+              <div>
+                <p className="uppercase text-xs text-gray-400">Email</p>
 
-      <form onSubmit={handleSubmit}>
-        <div className="grid md:grid-cols-2 gap-4">
-          <ContactInput
-            label={t("contactName")}
-            name="name"
-            value={formData.name}
-            error={errors.name}
-            focused={focusedField === "name"}
-            onChange={handleChange}
-            onFocus={() => handleFocus("name")}
-            onBlur={handleBlur}
-          />
+                <a href="mailto:karczubroland@gmail.com" className="font-semibold hover:underline">
+                  karczubroland@gmail.com
+                </a>
+              </div>
 
-          <ContactInput
-            label={t("contactPhone")}
-            name="phone"
-            value={formData.phone}
-            error={errors.phone}
-            focused={focusedField === "phone"}
-            onChange={handleChange}
-            onFocus={() => handleFocus("phone")}
-            onBlur={handleBlur}
-          />
-        </div>
+              <div>
+                <p className="uppercase text-xs text-gray-400">{t("location")}</p>
 
-        <ContactInput
-          label={t("contactEmail")}
-          name="email"
-          type="email"
-          value={formData.email}
-          error={errors.email}
-          focused={focusedField === "email"}
-          onChange={handleChange}
-          onFocus={() => handleFocus("email")}
-          onBlur={handleBlur}
-        />
+                <p className="font-semibold">{t("hungary")}</p>
+              </div>
 
-        <ContactInput
-          label={t("contactSubject")}
-          name="subject"
-          value={formData.subject}
-          error={errors.subject}
-          focused={focusedField === "subject"}
-          onChange={handleChange}
-          onFocus={() => handleFocus("subject")}
-          onBlur={handleBlur}
-        />
+              <div>
+                <p className="uppercase text-xs text-gray-400">{t("responseTime")}</p>
 
-        <ContactInput
-          textarea
-          label={t("contactMessage")}
-          name="message"
-          value={formData.message}
-          focused={focusedField === "message"}
-          onChange={handleChange}
-          onFocus={() => handleFocus("message")}
-          onBlur={handleBlur}
-        />
-
-        <button type="submit" className="w-full bg-black text-white mt-4 p-4 rounded-lg font-bold" disabled={loading}>
-          {loading ? "Küldés folyamatban.." : t("contactSend")}
-        </button>
-      </form>
-
-      {showModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center">
-          <div className="bg-white rounded-xl p-8 w-[90%] max-w-sm text-center shadow-xl">
-            <p>{modalMessage}</p>
-
-            <button className="mt-5 bg-black text-white px-5 py-2 rounded-lg" onClick={() => setShowModal(false)}>
-              OK
-            </button>
+                <p className="font-semibold">{t("usuallyTime")}</p>
+              </div>
+            </div>
           </div>
+
+          <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-lg p-8 space-y-2">
+            <div className="grid md:grid-cols-2 gap-4">
+              <ContactInput
+                label={t("contactName")}
+                name="name"
+                value={formData.name}
+                error={errors.name}
+                focused={focusedField === "name"}
+                onChange={handleChange}
+                onFocus={() => handleFocus("name")}
+                onBlur={handleBlur}
+              />
+
+              <ContactInput
+                label={t("contactPhone")}
+                name="phone"
+                value={formData.phone}
+                error={errors.phone}
+                focused={focusedField === "phone"}
+                onChange={handleChange}
+                onFocus={() => handleFocus("phone")}
+                onBlur={handleBlur}
+              />
+            </div>
+
+            <ContactInput
+              label={t("contactEmail")}
+              name="email"
+              type="email"
+              value={formData.email}
+              error={errors.email}
+              focused={focusedField === "email"}
+              onChange={handleChange}
+              onFocus={() => handleFocus("email")}
+              onBlur={handleBlur}
+            />
+
+            <ContactInput
+              label={t("contactSubject")}
+              name="subject"
+              value={formData.subject}
+              error={errors.subject}
+              focused={focusedField === "subject"}
+              onChange={handleChange}
+              onFocus={() => handleFocus("subject")}
+              onBlur={handleBlur}
+            />
+
+            <ContactInput
+              textarea
+              label={t("contactMessage")}
+              name="message"
+              value={formData.message}
+              focused={focusedField === "message"}
+              onChange={handleChange}
+              onFocus={() => handleFocus("message")}
+              onBlur={handleBlur}
+            />
+
+            <button disabled={loading} className="w-full mt-4 py-4 rounded-xl bg-black text-white font-bold hover:bg-gray-800 transition disabled:opacity-60">
+              {loading ? t("contactSending") : t("contactSend")}
+            </button>
+          </form>
         </div>
-      )}
-    </div>
+
+        {showModal && (
+          <div className="fixed inset-0 bg-black/60 flex justify-center items-center z-50">
+            <div className="bg-white rounded-2xl shadow-xl p-8 max-w-sm w-[90%] text-center">
+              <h3 className="text-2xl font-bold mb-3">{modalMessage === t("contactSuccess") ? "✓" : "✕"}</h3>
+
+              <p className="text-gray-700">{modalMessage}</p>
+
+              <button onClick={() => setShowModal(false)} className="mt-6 px-8 py-3 rounded-xl bg-black text-white hover:bg-gray-800 transition">
+                OK
+              </button>
+            </div>
+          </div>
+        )}
+      </section>
+    </AnimatedSection>
   );
 };
 

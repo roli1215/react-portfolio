@@ -14,7 +14,7 @@ const ProjectItem = ({ img, title, descriptionHU, descriptionEN, language }: Pro
   const description = currentLanguage === "en" ? descriptionEN : descriptionHU;
 
   return (
-    <div className="group rounded-xl overflow-hidden shadow-lg hover:-translate-y-2 transition-all duration-300 bg-white">
+    <div className="rounded-xl shadow-lg hover:-translate-y-2 hover:shadow-2xl transition duration-300 bg-white overflow-hidden">
       <div className="overflow-hidden h-60">
         <img src={img} alt={title} className="w-full h-full object-cover group-hover:scale-110 transition duration-500" />
       </div>

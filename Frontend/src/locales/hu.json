@@ -1,11 +1,11 @@
 {
-    "name": "Roland",
+    "name": "Karczub Roland",
     "status1": "Angular fejlesztő",
     "status2": "Terepfutó ",
     "projects": "Projektek",
-    "projectsText": "Itt láthatóak a projektjeim amiket elkészítettem, vagy még dolgozom rajtuk. Néhány közülük még kezdetleges, nem bejefezett, de szeretek vele foglalkozni, mikor az időm engedi. Sokat mindent tanulok miközben készítem őket, és próbálok minél több tapasztalatot szerezni ezáltal, hogy sikeresebb legyek.",
+    "projectsText": "Az alábbi projektek a szakmai fejlődésemet és érdeklődési területeimet mutatják be. Mindegyik projektet saját kezűleg terveztem és fejlesztettem, különböző technológiákat alkalmazva a frontendtől egészen a backendig.",
     "about": "Rólam",
-    "aboutText": "Programtervező informatikusként diplomáztam le az egyetemen, és főbb érdeklődési köröm a webfejlesztés és a mobilapplikációk fejlesztése. Készítettem pár saját projektet eddig, hogy magasabb szintre tudjam emelni a programozási képességeimet. Tapasztalatom főképp React/React Native keretrendszerben van, ahol TypeScript/JavaScript nyelvet használok, nem relációs adatbázisokkal dolgozom főképp. Nyitott vagyok, hogy kipróbáljak új dolgokat, más téren is fejlesszem magamat, és minél több mindenben legyen tapasztalatom, ismeretem.",
+    "aboutText": "Angular fejlesztőként dolgozom a Nemzeti Adó- és Vámhivatalnál, ahol vállalati webes alkalmazások fejlesztésében veszek részt. Elsősorban Angular, TypeScript és Node.js technológiákkal dolgozom, de korábban Reacttel, Pythonnal és Java nyelven is készítettem projekteket. Szabadidőmben folyamatosan fejlesztem magam, új technológiákat tanulok, valamint saját projekteken dolgozom, ahol modern webes megoldásokat és felhőalapú szolgáltatásokat alkalmazok. A programozás mellett a terepfutás a legnagyobb szenvedélyem, amely kitartásra, problémamegoldásra és folyamatos fejlődésre tanított – ezeket a szemléleteket a fejlesztői munkám során is igyekszem alkalmazni.",
     "education": "Tanulmányok",
     "education1": "Programtervező informatikus - Miskolci Egyetem",
     "education2": "Informatika szak - Bocskai István Gimnázium és Technikum",
@@ -26,5 +26,17 @@
     "phoneError": "A telefonszám nem megfelelő formátumú!",
     "subjectError": "A mező csak betűket és szóközöket tartalmazhat!",
     "work": "Munkatapasztalat",
-    "develop": "fejlesztő"
+    "develop": "fejlesztő",
+    "present": "Jelenleg",
+    "letswork": "Dolgozzunk együtt!",
+    "location": "Elhelyezkedés",
+    "responseTime": "Válaszidő",
+    "hungary": "Magyarország",
+    "usuallyTime": "Általában 24 órán belül",
+    "built": "Készítve",
+    "w1": "Angular alapú vállalati alkalmazások fejlesztése",
+    "w2": "TypeScript és modern frontend architektúrák használata",
+    "w3": "REST API integrációk",
+    "w4": "PrimeNG komponensek fejlesztése",
+    "w5": "Backend fejlesztőkkel való együttműködés"
 }

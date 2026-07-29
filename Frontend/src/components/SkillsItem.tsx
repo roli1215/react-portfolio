@@ -1,15 +1,15 @@
+import { motion } from "framer-motion";
+
 interface SkillsItemProps {
   img: string;
   name: string;
 }
 
-const SkillsItem = ({ img, name }: SkillsItemProps) => {
-  return (
-    <div className="flex flex-col items-center justify-center bg-gray-100 rounded-xl p-4 shadow-md hover:-translate-y-2 transition">
-      <img src={img} alt={name} className="w-14 h-14" />
-      <p className="mt-3 font-semibold text-sm">{name}</p>
-    </div>
-  );
-};
+const SkillsItem = ({ img, name }: SkillsItemProps) => (
+  <motion.div whileHover={{ scale: 1.15 }} transition={{ duration: 0.2 }} className="flex flex-col items-center gap-2">
+    <img src={img} alt={name} className="max-w-[70px]" />
+    <span className="text-sm font-semibold">{name}</span>
+  </motion.div>
+);
 
 export default SkillsItem;
